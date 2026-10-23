@@ -90,7 +90,7 @@ export function crearCuaderno(el, T) {
     const c = enCamino(R, fh), kmS = c.s / 1000;
     let alt, donde, km, tramo, nota;
     if (todo) {
-      alt = Math.round(L.casa.h); donde = 'en la casa'; km = `${coma(R.km.ahio)} km de Ahío; ${coma(R.km.agueira + R.km.sanmartin)} km de agua remontada`;
+      alt = Math.round(L.casa.h); donde = 'en la casa'; km = `${kmTxt(R.km.ahio)} km de Ahío y ${kmTxt(R.km.agueira + R.km.sanmartin)} de agua remontada`;
       tramo = A.oscos; nota = A.resto;
     } else if (llega) {
       alt = Math.round(L.casa.h); donde = 'en la casa'; km = `A unos ${cerca} m del río San Martín`;
@@ -189,7 +189,7 @@ export function opRotulo(k, F, libre, M) {
     case 'casa': return Math.max(F.intro, suave((F.f - .93) / .05), F.llegada);
     case 'santa-eulalia': case 'villanueva': return Math.max(F.intro, F.vista);
     case 'r-ahio': return Math.max(F.intro * .9, ventana(F.f, .01, M.fa - .03) * viaje);
-    case 'mazo-mon': return Math.max(ventana(F.f, M.fm - .09, M.fm + .07) * viaje, F.vista);
+    case 'mazo-mon': return ventana(F.f, M.fm - .09, M.fm + .07) * viaje;   // en la vista de todo manda el palacio
     case 'mon': return Math.max(ventana(F.f, M.fm - .07, M.fm + .06) * viaje, F.vista);
     case 'r-agueira': return ventana(F.f, M.fa + .005, M.fs - .01) * viaje;
     case 'r-sanmartin': return ventana(F.f, M.fs + .005, .95) * viaje;

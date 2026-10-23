@@ -189,6 +189,10 @@
   box-shadow: 0 16px 34px -18px rgb(29 36 32 / .55), 0 0 0 1px rgb(29 36 32 / .06);
   transform: rotate(1.4deg);
 }
+/* en pantallas estrechas, el -.5rem y el giro la sacaban del borde: el móvil ensanchaba la vista */
+@media (max-width: 899px) {
+  [data-modulo="vidas"] .fx-vidas-foto { right: .4rem; transform: rotate(1deg); }
+}
 [data-modulo="vidas"] .fx-vidas-foto .fx-pie { margin: .3rem 0 .1rem; font-size: .72rem; }
 [data-modulo="vidas"] .fx-vidas-foto-marco { aspect-ratio: 16 / 9; overflow: hidden; background: var(--niebla, #D7DCDA); }
 [data-modulo="vidas"] .fx-vidas-foto-marco :is(picture, img) { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -271,22 +275,53 @@
   padding-block: clamp(1rem, 3svh, 2rem) clamp(2rem, 6svh, 4rem);
   box-sizing: border-box;
 }
-[data-modulo="vidas"] .fx-vidas--fijo .fx-vidas-arte { margin-bottom: 0; align-self: center; }
-[data-modulo="vidas"] .fx-vidas--fijo .fx-vidas-dibujo .alzado { max-height: calc(100svh - var(--cabecera, 4.25rem) - 9rem); }
-[data-modulo="vidas"] .fx-vidas--fijo .fx-vidas-foto { bottom: -2.2rem; width: min(38%, 300px); }
+/* el arte: el dibujo arriba y, debajo, las dos fotos como recortes (la antigua y la de hoy) */
+[data-modulo="vidas"] .fx-vidas--fijo .fx-vidas-arte {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  margin-bottom: 0;
+}
+[data-modulo="vidas"] .fx-vidas--fijo .fx-vidas-lamina { grid-column: 1 / -1; }
+[data-modulo="vidas"] .fx-vidas--fijo .fx-vidas-lamina > .fx-pie { display: none; }
+[data-modulo="vidas"] .fx-vidas--fijo .fx-vidas-dibujo .alzado { max-height: calc(100svh - var(--cabecera, 4.25rem) - 15rem); }
+[data-modulo="vidas"] .fx-vidas--fijo .fx-vidas-foto {
+  position: relative; right: auto; bottom: auto;
+  grid-column: 2; grid-row: 2;
+  justify-self: end;
+  width: min(100%, 290px);
+  margin-top: -2.4rem;
+  margin-right: -.6rem;
+}
+[data-modulo="vidas"] .fx-antiguo--arte { display: none; }
+[data-modulo="vidas"] .fx-vidas--fijo .fx-antiguo--vida { display: none; }
+[data-modulo="vidas"] .fx-vidas--fijo .fx-antiguo--arte {
+  display: grid;
+  grid-template-columns: minmax(0, 156px) minmax(0, 1fr);
+  gap: .2rem .8rem;
+  align-items: end;
+  grid-column: 1; grid-row: 2;
+  max-width: none;
+  margin: -2.4rem 0 0 -.4rem;
+  position: relative;
+  transition: opacity .6s var(--ease-suave, ease);
+}
+[data-modulo="vidas"] .fx-vidas--fijo .fx-antiguo--arte figcaption { margin: 0 0 .1rem; font-size: .72rem; line-height: 1.4; }
+[data-modulo="vidas"] .fx-vidas--fijo .fx-antiguo--arte .fx-antiguo-fuente { font-size: .66rem; }
+/* la foto antigua cuenta las vidas pasadas; hoy se aparta un poco */
+[data-modulo="vidas"] .fx-vidas--fijo[data-vida="3"] .fx-antiguo--arte { opacity: .45; }
 [data-modulo="vidas"] .fx-vidas--fijo .fx-vidas-lista { grid-template-areas: 'v'; gap: 0; }
 [data-modulo="vidas"] .fx-vidas--fijo .fx-vida {
   grid-area: v;
   opacity: 0;
-  transform: translateY(16px);
   pointer-events: none;
-  transition: opacity .45s var(--ease-suave, ease), transform .6s var(--ease-salida, ease);
+  transition: opacity .45s var(--ease-suave, ease);
 }
-[data-modulo="vidas"] .fx-vidas--fijo .fx-vida.es-activa { opacity: 1; transform: none; pointer-events: auto; transition-delay: .12s; }
+[data-modulo="vidas"] .fx-vidas--fijo .fx-vida > :is(h3, p, ul) { transform: translateY(14px); transition: transform .6s var(--ease-salida, ease); }
+[data-modulo="vidas"] .fx-vidas--fijo .fx-vida.es-activa { opacity: 1; pointer-events: auto; transition-delay: .12s; }
+[data-modulo="vidas"] .fx-vidas--fijo .fx-vida.es-activa > :is(h3, p, ul) { transform: none; transition-delay: .12s; }
 [data-modulo="vidas"] .fx-vidas--fijo .fx-vida .fx-placa--mini { display: none; }
 [data-modulo="vidas"] .fx-vidas--fijo .fx-vidas-marcas { display: flex; }
-[data-modulo="vidas"] .fx-vidas--fijo .fx-antiguo { transform: translateY(8px); transition: transform .8s var(--ease-salida, ease); }
-[data-modulo="vidas"] .fx-vidas--fijo .fx-vida.es-activa .fx-antiguo { transform: none; }
 /* sin fijar (móvil, quieto o sobria): todo en lista, cada vida con su placa */
 [data-modulo="vidas"] .fx-vidas:not(.fx-vidas--fijo) .fx-placa--grande { display: none; }
 [data-modulo="vidas"] .fx-vidas--quieto .fx-placa-cara,
@@ -451,7 +486,7 @@
 [data-modulo="indice"] .fx-boton:hover { box-shadow: 0 0 0 4px rgb(242 184 75 / .25), 0 0 26px 4px rgb(242 184 75 / .35); }
 [data-modulo="indice"] .fx-boton--claro { background: transparent; color: var(--crema, #FAF6E1); border-color: rgb(250 246 225 / .45); }
 [data-modulo="indice"] .fx-boton--claro:hover { border-color: var(--linterna, #F2B84B); box-shadow: none; }
-[data-modulo="indice"] .fx-ficha :is(.fx-boton, .fx-ficha-mini):focus-visible {
+[data-modulo="indice"] .fx-ficha :is(.fx-boton, .fx-ficha-mini, .fx-ficha-ver):focus-visible {
   outline: 2px solid var(--crema, #FAF6E1);
   outline-offset: 3px;
   box-shadow: 0 0 0 6px rgb(242 184 75 / .45), 0 0 22px 6px rgb(242 184 75 / .45);
@@ -462,6 +497,7 @@
   border-radius: 2px;
   background: var(--pizarra-2, #3D444B);
 }
+[data-modulo="indice"] .fx-ficha-ver { display: block; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: none; cursor: zoom-in; }
 [data-modulo="indice"] .fx-ficha-grande :is(picture, img) { display: block; width: 100%; height: 100%; object-fit: cover; }
 [data-modulo="indice"] .fx-ficha-minis { display: flex; flex-wrap: wrap; gap: .5rem; margin: .7rem 0 0; padding: 0; list-style: none; }
 [data-modulo="indice"] .fx-ficha-mini {

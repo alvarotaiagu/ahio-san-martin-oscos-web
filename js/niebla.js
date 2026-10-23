@@ -296,6 +296,8 @@ void main() {
       gl.useProgram(prD.p);
       gl.viewport(0, 0, bw, bh);
       const de = desp[lado], a = desp[1 - lado];
+      gl.activeTexture(gl.TEXTURE1);
+      gl.bindTexture(gl.TEXTURE_2D, null);          // nada atado que sea a la vez destino (bucle de realimentación)
       gl.bindFramebuffer(gl.FRAMEBUFFER, a.f);
       gl.activeTexture(gl.TEXTURE0);
       gl.bindTexture(gl.TEXTURE_2D, de.t);

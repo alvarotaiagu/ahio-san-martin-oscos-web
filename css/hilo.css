@@ -1,0 +1,303 @@
+/* Ahío San Martín · «El hilo» (F) y la calceta del pie (agente Hilo).
+   Todo bajo [data-modulo="hilo"], [data-modulo="calceta"] o #hilo-capa. Tokens de css/estilos.css
+   leídos con respaldo. El hilo es un canvas entre dos capas de cada dibujo: fondo (debajo) y
+   frente (encima), por eso la <ol> aísla su apilado y los <li> no crean contexto (ni transform
+   ni opacity en ellos). */
+
+[data-modulo="hilo"] .hl {
+  --hl-verde: var(--verde, #023919);
+  --hl-tinta: var(--tinta, #1D2420);
+  --hl-tinta-2: var(--tinta-2, #5F635A);
+  --hl-acento: var(--linterna-texto, #725F31);
+  --hl-pano: #F7F2E6;                 /* el paño de lino donde se trabaja la lana (como en el cartel) */
+  --hl-rail: 280px;                   /* la columna por la que baja el hilo */
+  --hl-dib: 240px;                    /* cada dibujo */
+  --hl-trazo: 1.5;                    /* grosor del trazo, en unidades del viewBox (240) */
+  --hl-titular: var(--letra-titular, 'Gilda Display', 'Times New Roman', Georgia, serif);
+  --hl-placa: var(--letra-placa, 'Castoro Titling', 'Gilda Display', Georgia, serif);
+  --hl-texto: var(--letra-texto, 'Wix Madefor Text', system-ui, sans-serif);
+  position: relative;
+  max-width: var(--ancho, 1240px);
+  margin-inline: auto;
+  padding-inline: var(--margen, clamp(1rem, 4vw, 2.5rem));
+  color: var(--hl-tinta);
+  font-family: var(--hl-texto);
+}
+[data-modulo="hilo"] .hl p { margin: 0 0 1em; }
+
+/* ---------- la entrada: el texto de la Xuntanza y las dos fotos ---------- */
+[data-modulo="hilo"] .hl-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+  max-width: 68rem;
+  margin-inline: auto;
+}
+[data-modulo="hilo"] .hl-intro-texto { max-width: var(--ancho-texto, 38rem); font-size: 1.0625rem; line-height: 1.65; }
+[data-modulo="hilo"] .hl .hl-lead {
+  font-family: var(--hl-titular);
+  font-size: clamp(1.75rem, 1.15rem + 2.2vw, 2.7rem);
+  line-height: 1.1;
+  color: var(--hl-verde);
+  margin: 0 0 1.1rem;
+  text-wrap: balance;
+}
+[data-modulo="hilo"] .hl-cita { margin: 1.6rem 0; padding: 0 0 0 1.2rem; border-left: 2px solid var(--linea, rgb(2 57 25 / .22)); }
+[data-modulo="hilo"] .hl .hl-cita p { font-family: var(--hl-titular); font-size: clamp(1.25rem, 1rem + .9vw, 1.6rem); line-height: 1.3; color: var(--hl-verde); margin: 0; }
+
+[data-modulo="hilo"] .hl-fotos { position: relative; width: min(100%, 300px); justify-self: center; }
+[data-modulo="hilo"] .hl-foto { margin: 0; }
+[data-modulo="hilo"] .hl-foto-marco { overflow: hidden; background: rgb(2 57 25 / .06); }
+[data-modulo="hilo"] .hl-foto--filandeira .hl-foto-marco { aspect-ratio: 572 / 1024; border-radius: var(--radio, 3px); }
+[data-modulo="hilo"] .hl-foto-marco img,
+[data-modulo="hilo"] .hl-foto-marco picture { display: block; width: 100%; height: 100%; object-fit: cover; }
+[data-modulo="hilo"] .hl-foto figcaption { font-size: .8125rem; line-height: 1.35; color: var(--hl-tinta-2); margin-top: .55rem; }
+[data-modulo="hilo"] .hl-foto--xuntanza {
+  position: absolute;
+  left: -24%;
+  bottom: 9%;
+  width: 46%;
+  padding: 6px 6px 4px;
+  background: #FBF8EF;
+  box-shadow: 0 10px 24px -12px rgb(29 36 32 / .45), 0 1px 0 rgb(29 36 32 / .08);
+  rotate: -3deg;
+}
+[data-modulo="hilo"] .hl-foto--xuntanza .hl-foto-marco { aspect-ratio: 3 / 4; }
+[data-modulo="hilo"] .hl-foto--xuntanza figcaption { margin-top: .3rem; font-size: .75rem; }
+[data-modulo="hilo"] .hl-foto:has(.hl-foto-marco:empty) { display: none; }
+
+/* ---------- la cabecera de los pasos ---------- */
+[data-modulo="hilo"] .hl-cabeza { text-align: center; margin: clamp(4rem, 9vw, 7rem) auto clamp(1.2rem, 3vw, 2rem); max-width: 34rem; }
+[data-modulo="hilo"] .hl-titulo {
+  font-family: var(--hl-titular);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.3rem);
+  line-height: 1.15;
+  color: var(--hl-verde);
+  margin: 0 0 .5rem;
+}
+[data-modulo="hilo"] .hl .hl-pista { font-size: .875rem; color: var(--hl-tinta-2); margin: 0; }
+[data-modulo="hilo"] .hl-pista-dedo { display: none; }
+@media (hover: none) {
+  [data-modulo="hilo"] .hl-pista-raton { display: none; }
+  [data-modulo="hilo"] .hl-pista-dedo { display: inline; }
+}
+[data-modulo="hilo"] .hl[data-modo="quieto"] .hl-pista { display: none; }
+
+/* ---------- las seis estaciones: el paño en el centro, el texto a los lados ---------- */
+[data-modulo="hilo"] .hl-pasos {
+  position: relative;
+  isolation: isolate;
+  list-style: none;
+  margin: 0 auto;
+  padding: clamp(2rem, 4vw, 3rem) 0 clamp(2.5rem, 5vw, 4rem);
+  max-width: 68rem;
+  touch-action: pan-y pinch-zoom;     /* el gesto vertical es siempre scroll */
+}
+[data-modulo="hilo"] .hl-pasos::before {          /* el paño de lino, con su pespunte */
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - var(--hl-rail) / 2);
+  width: var(--hl-rail);
+  background:
+    repeating-linear-gradient(0deg, rgb(120 100 70 / .045) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgb(120 100 70 / .04) 0 1px, transparent 1px 3px),
+    var(--hl-pano);
+  outline: 1px dashed rgb(2 57 25 / .2);
+  outline-offset: -10px;
+  box-shadow: 0 1px 0 rgb(29 36 32 / .05), 0 18px 40px -30px rgb(29 36 32 / .35);
+  border-radius: 2px;
+}
+[data-modulo="hilo"] .hl-paso {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--hl-rail) minmax(0, 1fr);
+  align-items: center;
+  margin: 0;
+}
+[data-modulo="hilo"] .hl-paso + .hl-paso { margin-top: clamp(1.5rem, 5vw, 4.5rem); }
+[data-modulo="hilo"] .hl-dib {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  position: relative;
+  width: var(--hl-dib);
+  aspect-ratio: 1;
+  user-select: none;
+  -webkit-user-select: none;
+}
+[data-modulo="hilo"] .hl-dib svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+[data-modulo="hilo"] .hl-dib-fondo { z-index: 0; }
+[data-modulo="hilo"] .hl-dib-frente { z-index: 2; }
+[data-modulo="hilo"] .hl-texto {
+  grid-column: 3;
+  grid-row: 1;
+  position: relative;
+  z-index: 3;
+  max-width: 25rem;
+  padding-left: clamp(1.25rem, 3.5vw, 3rem);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+[data-modulo="hilo"] .hl-paso:nth-child(even) .hl-texto {
+  grid-column: 1;
+  justify-self: end;
+  text-align: right;
+  padding-left: 0;
+  padding-right: clamp(1.25rem, 3.5vw, 3rem);
+}
+[data-modulo="hilo"] .hl .hl-num {
+  font-family: var(--hl-placa);
+  font-size: .8125rem;
+  letter-spacing: .2em;
+  color: var(--hl-acento);
+  margin: 0 0 .35rem;
+}
+[data-modulo="hilo"] .hl-nombre {
+  font-family: var(--hl-titular);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1.15rem + 1.1vw, 2rem);
+  line-height: 1.1;
+  color: var(--hl-verde);
+  margin: 0 0 .5rem;
+}
+[data-modulo="hilo"] .hl-texto p:last-child { margin-bottom: 0; }
+
+/* el hilo: entre el fondo y el frente de cada dibujo */
+[data-modulo="hilo"] .hl-cuerda { position: absolute; top: 0; z-index: 1; pointer-events: none; }
+[data-modulo="hilo"] .hl-cuerda.es-agarrable { pointer-events: auto; cursor: grab; }
+[data-modulo="hilo"] .hl-cuerda.es-agarrado,
+[data-modulo="hilo"] .hl.es-arrastrando .hl-pasos { cursor: grabbing; }
+
+/* ---------- los dibujos a línea: se trazan cuando llega el hilo ---------- */
+[data-modulo="hilo"] .hl-dib .t {
+  fill: none;
+  stroke: var(--hl-verde);
+  stroke-width: var(--hl-trazo);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1.02;
+}
+[data-modulo="hilo"] .hl-dib .fino { stroke-width: calc(var(--hl-trazo) * .68); }
+[data-modulo="hilo"] .hl-dib .aro { stroke-width: calc(var(--hl-trazo) * .85); }
+[data-modulo="hilo"] .hl-dib .t.tapa { fill: var(--hl-pano); }          /* la carda de delante tapa el hilo */
+[data-modulo="hilo"] .hl-dib .hebra-b { stroke: rgb(86 64 36 / .8); stroke-width: calc(var(--hl-trazo) * 2.8); }
+[data-modulo="hilo"] .hl-dib .hebra-c { stroke: #EFE6D1; stroke-width: calc(var(--hl-trazo) * 1.6); }
+[data-modulo="hilo"] .hl-dib .r { opacity: 0; }
+[data-modulo="hilo"] .hl-dib .m { fill: var(--hl-verde); fill-opacity: .5; }
+[data-modulo="hilo"] .hl-dib .agua { fill: rgb(64 118 128 / .2); }
+[data-modulo="hilo"] .hl-dib .punto-iz { fill: #F3EAD6; stroke: rgb(84 62 34 / .55); stroke-width: .7; }
+[data-modulo="hilo"] .hl-dib .punto-de { fill: #E2D3B3; stroke: rgb(84 62 34 / .55); stroke-width: .7; }
+[data-modulo="hilo"] .hl-paso.es-llegado .t {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.15s var(--ease-suave, cubic-bezier(.65, 0, .35, 1)) calc(var(--k, 0) * 30ms);
+}
+[data-modulo="hilo"] .hl-paso.es-llegado .r { opacity: 1; transition: opacity .7s ease calc(350ms + var(--k, 0) * 30ms); }
+[data-modulo="hilo"] .hl[data-modo="quieto"] .hl-dib .t { stroke-dashoffset: 0; transition: none; }
+[data-modulo="hilo"] .hl[data-modo="quieto"] .hl-dib .r { opacity: 1; transition: none; }
+
+/* ---------- el cierre ---------- */
+[data-modulo="hilo"] .hl-cierre { text-align: center; max-width: 40rem; margin: clamp(2.5rem, 6vw, 4.5rem) auto 0; }
+[data-modulo="hilo"] .hl .hl-frase {
+  font-family: var(--hl-titular);
+  font-size: clamp(1.9rem, 1.2rem + 3vw, 3.3rem);
+  line-height: 1.08;
+  color: var(--hl-verde);
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+[data-modulo="hilo"] .hl-acciones { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; justify-content: center; align-items: center; margin-top: 1.5rem; }
+[data-modulo="hilo"] .hl-boton {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: .8rem 1.5rem;
+  border-radius: var(--radio, 3px);
+  background: var(--hl-verde);
+  color: var(--crema, #FAF6E1);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color .2s ease, box-shadow .2s ease;
+}
+[data-modulo="hilo"] .hl-boton:hover { background: var(--verde-2, #1F5236); box-shadow: 0 0 0 4px var(--linterna-halo, rgb(242 184 75 / .38)); }
+[data-modulo="hilo"] .hl-correo { color: var(--hl-verde); text-underline-offset: .2em; }
+[data-modulo="hilo"] .hl-boton:focus-visible,
+[data-modulo="hilo"] .hl-correo:focus-visible {
+  outline: 2px solid var(--foco-contorno, #023919);
+  outline-offset: 3px;
+  box-shadow: var(--foco-halo, 0 0 0 4px rgb(242 184 75 / .38), 0 0 22px 6px rgb(242 184 75 / .45));
+}
+
+/* ---------- tableta y móvil: el paño a la izquierda, el texto a la derecha ---------- */
+@media (max-width: 1023px) {
+  [data-modulo="hilo"] .hl { --hl-rail: 220px; --hl-dib: 190px; --hl-trazo: 1.85; }
+  [data-modulo="hilo"] .hl-pasos::before { left: 0; }
+  [data-modulo="hilo"] .hl-paso { grid-template-columns: var(--hl-rail) minmax(0, 1fr); }
+  [data-modulo="hilo"] .hl-dib { grid-column: 1; }
+  [data-modulo="hilo"] .hl-texto,
+  [data-modulo="hilo"] .hl-paso:nth-child(even) .hl-texto {
+    grid-column: 2;
+    justify-self: start;
+    text-align: left;
+    padding: 0 0 0 clamp(1rem, 3vw, 2rem);
+  }
+}
+@media (max-width: 759px) {
+  [data-modulo="hilo"] .hl { --hl-rail: 112px; --hl-dib: 104px; --hl-trazo: 3.1; }
+  [data-modulo="hilo"] .hl-intro { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  [data-modulo="hilo"] .hl-fotos { width: min(74%, 280px); }
+  [data-modulo="hilo"] .hl-foto--xuntanza { left: -14%; width: 44%; }
+  [data-modulo="hilo"] .hl-paso { align-items: start; }
+  [data-modulo="hilo"] .hl-paso + .hl-paso { margin-top: 2.25rem; }
+  [data-modulo="hilo"] .hl-texto { font-size: .9688rem; line-height: 1.55; }
+  [data-modulo="hilo"] .hl-pasos::before { outline-offset: -6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-modulo="hilo"] .hl-dib .t { stroke-dashoffset: 0; transition: none !important; }
+  [data-modulo="hilo"] .hl-dib .r { opacity: 1; transition: none !important; }
+}
+
+/* ---------- el margen por el que baja el hilo desde la sección de Ena ---------- */
+#hilo-capa { position: absolute; top: 0; left: 0; width: 100%; height: 0; z-index: 4; pointer-events: none; }   /* igual que en estilos.css */
+#hilo-capa .hl-capa-lienzo { position: absolute; pointer-events: none; }
+#hilo-capa .hl-capa-lienzo.es-agarrable { pointer-events: auto; cursor: grab; }
+#hilo-capa .hl-capa-lienzo.es-agarrado { cursor: grabbing; }
+
+/* ---------- la calceta del pie ---------- */
+[data-modulo="calceta"] .cl { display: grid; justify-items: center; gap: .9rem; }
+[data-modulo="calceta"] .cl-logo { width: clamp(64px, 8vw, 88px); height: auto; }
+[data-modulo="calceta"] .cl-tira { width: 100%; }
+[data-modulo="calceta"] .cl-svg { display: block; width: 100%; height: auto; overflow: visible; }
+[data-modulo="calceta"] .cl-iz { fill: #F4ECDA; }
+[data-modulo="calceta"] .cl-de { fill: #E2D4B6; }
+[data-modulo="calceta"] .cl-fila path { stroke: rgb(84 62 34 / .5); stroke-width: .7; }
+[data-modulo="calceta"] .es-raya .cl-iz { fill: #1F5A3A; }
+[data-modulo="calceta"] .es-raya .cl-de { fill: #0E4427; }
+[data-modulo="calceta"] .es-raya path { stroke: rgb(0 20 8 / .55); }
+[data-modulo="calceta"] .cl-montaje,
+[data-modulo="calceta"] .cl-remate { fill: none; stroke: rgb(84 62 34 / .6); stroke-width: 1.1; stroke-linecap: round; }
+[data-modulo="calceta"] .cl-remate { stroke-dasharray: 1 2; stroke-dashoffset: 1.02; }
+[data-modulo="calceta"] .cl-hebra-b,
+[data-modulo="calceta"] .cl-cola-b { fill: none; stroke: rgb(84 62 34 / .7); stroke-width: 3.2; stroke-linecap: round; }
+[data-modulo="calceta"] .cl-hebra,
+[data-modulo="calceta"] .cl-cola { fill: none; stroke: #EFE5CD; stroke-width: 1.9; stroke-linecap: round; }
+[data-modulo="calceta"] .cl-ovillo circle { fill: #EFE5CD; stroke: rgb(84 62 34 / .6); }
+[data-modulo="calceta"] .cl-ovillo path { fill: none; stroke: rgb(84 62 34 / .45); }
+[data-modulo="calceta"] .cl-aguja-palo { fill: #C9A46A; stroke: rgb(70 50 20 / .7); stroke-width: .6; }
+[data-modulo="calceta"] .cl-aguja-bola { fill: #8A6A3A; }
+[data-modulo="calceta"] .cl-cola,
+[data-modulo="calceta"] .cl-cola-b { opacity: 0; }
+[data-modulo="calceta"] .cl.es-terminada .cl-remate { stroke-dashoffset: 0; transition: stroke-dashoffset 1.1s var(--ease-suave, cubic-bezier(.65, 0, .35, 1)); }
+[data-modulo="calceta"] .cl.es-terminada .cl-cola,
+[data-modulo="calceta"] .cl.es-terminada .cl-cola-b { opacity: 1; transition: opacity .5s ease .4s; }
+[data-modulo="calceta"] .cl.es-terminada .cl-aguja,
+[data-modulo="calceta"] .cl.es-terminada .cl-hebra,
+[data-modulo="calceta"] .cl.es-terminada .cl-hebra-b { opacity: 0; transition: opacity .45s ease; }
+@media (prefers-reduced-motion: reduce) {
+  [data-modulo="calceta"] .cl * { transition: none !important; }
+}

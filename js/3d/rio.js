@@ -3,7 +3,7 @@
 // juntarse con el Agüeira, el hilo (más fino y más pálido) remonta el agua — Agüeira arriba y río San Martín arriba —
 // hasta la casa, donde la linterna de la chincheta se enciende. Después, el explorador libre (OrbitControls; en táctil,
 // tras «Mover el mapa») con los rótulos de los tres Oscos, la Seimeira, Mazonovo y Mon y sus distancias por carretera.
-// No es el camino de grano de Tulla: aquí es agua (un cauce real del IGN), sin granos, con pepitas que brillan.
+// No es la escena de la hermana (Tulla, un camino por carretera): aquí es agua, un cauce real del IGN, con pepitas que brillan.
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { fase, marcas, enCamino, clamp, suave, crearRotulos, listaRotulos, opRotulo } from './guion.js';
 

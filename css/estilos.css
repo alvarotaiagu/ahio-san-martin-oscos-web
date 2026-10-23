@@ -128,7 +128,8 @@ h2 em { font-style: normal; color: var(--verde-2); }
 
 /* ============ cabecera fija ============ */
 .cab { position: fixed; top: 0; left: 0; right: 0; z-index: 60; height: var(--cabecera); color: var(--tinta); background: rgb(250 246 225 / .9); -webkit-backdrop-filter: blur(14px) saturate(1.1); backdrop-filter: blur(14px) saturate(1.1); --foco-contorno: var(--verde); --texto: var(--tinta); transition: box-shadow .45s, opacity .6s, transform .8s var(--ease-salida); }
-html.js:not(.cortina-fuera) .cab { opacity: 0; transform: translateY(-16px); pointer-events: none; }
+/* la cabecera aparece cuando la cortina EMPIEZA a abrirse (el dibujo de la casa vuela a su logo: [data-logo-cortina]) */
+html.js:not(.cortina-fuera):not(.cortina-abriendo) .cab { opacity: 0; pointer-events: none; }
 .cab.sc { box-shadow: 0 1px 0 rgb(2 57 25 / .14); }
 .cab__in { height: 100%; max-width: 1440px; margin-inline: auto; padding-inline: var(--margen); display: flex; align-items: center; gap: clamp(14px, 2.2vw, 34px); }
 .marca { display: flex; align-items: center; gap: 10px; margin-right: auto; line-height: 0; text-decoration: none; }
@@ -177,7 +178,9 @@ body.menu .cab .marca { background: var(--crema); padding: 4px 8px; border-radiu
 .portada__escena { grid-column: 2; grid-row: 1; position: relative; min-height: calc(100svh - var(--cabecera)); overflow: hidden; background: var(--niebla-2); }
 .portada__escena > picture > img, .portada__foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 46% 42%; }
 /* respaldo sin WebGL: dos capas de niebla en CSS (la primera funde la foto con la columna de texto) */
-.portada__niebla { position: absolute; inset: 0; pointer-events: none; }
+.portada__niebla { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+/* montada la niebla del módulo Entrada, de la nuestra solo queda el fundido con la columna de texto */
+.portada__escena[data-montado="1"] .portada__niebla i:last-child { display: none; }
 .portada__niebla i { position: absolute; inset: 0; display: block; }
 .portada__niebla i:first-child { background: linear-gradient(90deg, var(--niebla) 0%, rgb(215 220 218 / .72) 9%, rgb(215 220 218 / .18) 26%, transparent 42%), linear-gradient(0deg, rgb(215 220 218 / .5), transparent 34%); }
 .portada__niebla i:last-child { inset: -10% -20%; background: radial-gradient(60% 40% at 30% 85%, rgb(215 220 218 / .5), transparent 70%), radial-gradient(50% 35% at 80% 70%, rgb(215 220 218 / .36), transparent 70%); }

@@ -5,7 +5,7 @@
       img/fotos/fotos.json (el <img> conserva sus demás atributos).
    3. <!--plano-ruta--> → el plano 2D de «Los Oscos» (img/terreno/plano.*) si el módulo Ruta ya lo ha
       dejado; si no, nada (el respaldo se queda con la lista de lugares).
-   4. <span class="dist" data-dist="Lugar"></span> → «12 km · 20 min» si ref/raw/rutas.json (lo escribe
+   4. <span class="dist" data-dist="Lugar"></span> → «12 km por carretera» si ref/raw/rutas.json (lo escribe
       Ruta con OSRM) tiene ese lugar; si no, se queda vacío y no se ve. Nada de cifras inventadas.
    5. Los <link> y <script> de CSS/JS propios que aún no existen (los módulos de otros agentes
       mientras no estén) se quitan con un aviso: la web no pide archivos que no hay.
@@ -66,7 +66,7 @@ function plano() {
   const base = hay.find((e) => e === 'jpg' || e === 'png') || hay[hay.length - 1];
   const t = tamano(path.join(dir, 'plano.' + base)) || [1600, 1000];
   const fuentes = hay.filter((e) => e !== base).map((e) => `<source type="image/${e}" srcset="img/terreno/plano.${e}">`).join('');
-  return `<picture>${fuentes}<img class="oscos__plano" src="img/terreno/plano.${base}" width="${t[0]}" height="${t[1]}" alt="Plano del valle del río Ahío sobre el relieve y la foto aérea, con San Martín de Oscos, Santa Eulalia y Villanueva de Oscos, la Seimeira, Mazonovo y el Palacio de Mon" loading="lazy" decoding="async"></picture>`;
+  return `<picture>${fuentes}<img class="oscos__plano" src="img/terreno/plano.${base}" width="${t[0]}" height="${t[1]}" alt="Plano de Los Oscos con el río Ahío sobre el relieve y la foto aérea, con San Martín de Oscos, Santa Eulalia y Villanueva de Oscos, la Seimeira, Mazonovo y el Palacio de Mon" loading="lazy" decoding="async"></picture>`;
 }
 
 /* las distancias por carretera que deja el módulo Ruta (OSRM) en ref/raw/rutas.json.
@@ -97,16 +97,17 @@ function distancias() {
 const DIST = distancias();
 function rellenarDist(html) {
   let puestas = 0;
-  const r = html.replace(/<span class="dist" data-dist="([^"]+)"><\/span>/g, (m, lugar) => {
+  // solo los km: Ruta avisa de que los minutos de OSRM se quedan cortos en carreteras de montaña
+  const r = html.replace(/<span class="dist" data-dist="([^"]+)"((?: data-pie="[^"]*")?)><\/span>/g, (m, lugar, pie) => {
     const n = norm(lugar);
     const d = DIST.find((x) => norm(x.nombre) === n) || DIST.find((x) => norm(x.nombre).includes(n) || n.includes(norm(x.nombre)));
     if (!d) return m;
     puestas++;
-    const km = d.km < 10 ? d.km.toFixed(1).replace('.', ',') : String(Math.round(d.km));
-    const min = d.min != null ? ` · ${Math.max(1, Math.round(d.min))} min` : '';
-    return `<span class="dist" data-dist="${lugar}">${km} km${min} en coche</span>`;
+    const km = d.km < 20 ? d.km.toFixed(1).replace('.', ',').replace(/,0$/, '') : String(Math.round(d.km));
+    const extra = (/data-pie="([^"]*)"/.exec(pie) || [, ''])[1];
+    return `<span class="dist" data-dist="${lugar}"${pie}>${km} km por carretera${extra ? ' ' + extra : ''}</span>`;
   });
-  if (DIST.length) console.log(`  distancias: ${puestas} puestas de ${DIST.length} en rutas.json`);
+  if (DIST.length) console.log(`  distancias: ${puestas} huecos rellenos con ${DIST.length} lugares de rutas.json`);
   return r;
 }
 

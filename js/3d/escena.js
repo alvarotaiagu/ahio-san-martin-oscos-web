@@ -171,7 +171,7 @@ export function crearMotor(D, { S, alFallar } = {}) {
     const g = new THREE.Group();
     const palo = new THREE.Mesh(new THREE.CylinderGeometry(2.6, 2.6, 160, 8), new THREE.MeshBasicMaterial({ color: '#FAF6E1', transparent: true, opacity: .9, fog: false }));
     const bola = new THREE.Mesh(new THREE.SphereGeometry(13, 20, 14), new THREE.MeshBasicMaterial({ color: VERDE.clone(), fog: false })); bola.position.y = 86;
-    const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: texHalo, color: '#ffffff', transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending, fog: false, opacity: 0 }));
+    const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: texHalo, color: '#ffffff', transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, fog: false, opacity: 0 }));
     halo.position.y = 86; halo.scale.setScalar(140); halo.renderOrder = 6;
     g.add(palo, bola, halo); g.position.set(P.x, P.y + 80, P.z); escena.add(g);
     let luz = 0, noche = 0;

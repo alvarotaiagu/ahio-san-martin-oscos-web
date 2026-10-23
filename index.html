@@ -19,7 +19,7 @@
     var q = new URLSearchParams(location.search);
     if (q.has('revision')) {
       h.classList.add('revision');
-      if (q.get('densidad') === 'sobria') h.classList.add('densidad-sobria');
+      if (q.get('densidad') === 'sobria') { h.classList.add('densidad-sobria'); h.setAttribute('data-densidad', 'sobria'); }
     }
   } catch (e) {}
   // El puente con la cortina: existe desde el primer momento, cargue antes quien cargue.
@@ -39,6 +39,7 @@
     if (A.cortinaFuera) return;
     A.cortinaFuera = true;
     clearTimeout(window.__redCortina);
+    try { if (A.cortina && !A.cortina.fuera && A.cortina.retirar) A.cortina.retirar(); } catch (e) {}
     h.classList.remove('cortina-activa');
     h.classList.add('cortina-fuera');
     A.abrir();
@@ -47,15 +48,18 @@
   d.addEventListener('ahio:cortina-abre', function () { A.abrir(); });
   d.addEventListener('ahio:cortina-fuera', function () { A.retirarCortina(); });
   // red de seguridad por si main.js o la cortina no llegan: la cortina se va sola
-  window.__redCortina = setTimeout(function () { A.retirarCortina(); }, 6500);
+  // (si la cortina sigue en marcha, Ahio.cortina.enMarcha, se le deja acabar: espera hasta 12 s)
+  var red = function (t) { window.__redCortina = setTimeout(function () { if (A.cortina && A.cortina.enMarcha && !A.cortina.fuera && t < 12000) red(t + 1000); else A.retirarCortina(); }, t ? 1000 : 6500); };
+  red(0);
 })(document);
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Gilda+Display&family=Wix+Madefor+Text:wght@400..600&display=swap">
-<link rel="stylesheet" href="css/estilos.css?v=203bfc3c">
+<link rel="stylesheet" href="css/estilos.css?v=c1cb4ee9">
 <link rel="stylesheet" href="css/entrada.css?v=b8565344">
-<link rel="stylesheet" href="css/fachada.css?v=c3a3229f">
+<link rel="stylesheet" href="css/fachada.css?v=c0ffd516">
+<link rel="stylesheet" href="css/hilo.css?v=b4d7e9f9">
 <link rel="stylesheet" href="css/3d.css?v=1405bd5d">
 <link rel="icon" href="marca/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="marca/favicon-32.png" sizes="32x32" type="image/png">
@@ -162,7 +166,7 @@
 <header class="cab" id="cab">
   <div class="cab__in">
     <a class="marca" href="./" aria-label="Ahío San Martín, a la portada">
-      <img class="marca__casa" src="marca/simbolo-96.png" srcset="marca/simbolo-96.png 1x, marca/simbolo-192.png 2x" width="48" height="42" alt="">
+      <img class="marca__casa" data-logo-cortina src="marca/simbolo-96.png" srcset="marca/simbolo-96.png 1x, marca/simbolo-192.png 2x" width="48" height="42" alt="">
       <img class="marca__nombre" src="marca/nombre-480.png" srcset="marca/nombre-480.png 1x, marca/nombre-960.png 2x" width="190" height="21" alt="Ahío San Martín">
     </a>
     <nav class="cab__nav" aria-label="Principal">
@@ -179,11 +183,11 @@
   <div class="menu-movil" id="menu-movil" aria-hidden="true">
     <nav aria-label="Menú">
       <a href="#vidas"><small>Ayuntamiento, y también…</small>El edificio</a>
-      <a href="#apartamentos"><small>Ocho ventanas, ocho apartamentos</small>Apartamentos</a>
+      <a href="#apartamentos"><small>Dos en planta baja y seis dúplex</small>Apartamentos</a>
       <a href="#dentro"><small>Salones, recepción y jardín</small>Dentro</a>
       <a href="#ena"><small>La que lo lleva</small>Ena</a>
       <a href="#lana"><small>La Xuntanza de Filandeiras</small>La lana</a>
-      <a href="#oscos"><small>El valle del Ahío en 3D</small>Los Oscos</a>
+      <a href="#oscos"><small>El río Ahío en 3D</small>Los Oscos</a>
       <a href="#reservar"><small>El registro de entrada</small>Reservar</a>
       <a href="#llegar"><small>Y las preguntas</small>Cómo llegar</a>
     </nav>
@@ -219,7 +223,7 @@
         <p class="eyebrow">El nombre</p>
         <h2 id="t-rio" class="rio__tit" data-partir>Ahío, <em>como el río</em></h2>
         <p class="rio__entrada">El Ahío es el río principal de San Martín de Oscos: en busca del oro que se encontraba en él llegaron aquí los romanos, en el siglo&nbsp;I.</p>
-        <p class="rio__p">Ahío San Martín lleva su nombre. Son ocho apartamentos rurales en el edificio que fue el ayuntamiento del pueblo, una casona de pizarra y piedra con la cornisa blanca y una linterna de cristal en lo alto.</p>
+        <p class="rio__p">No pasa por el pueblo: baja por Mon, a unos kilómetros, hasta el Agüeira. Ahío San Martín son ocho apartamentos rurales en el edificio que fue el ayuntamiento del pueblo, una casona de pizarra y piedra con la cornisa blanca y una linterna de cristal en lo alto.</p>
       </div>
       <figure class="rio__f rio__f--casa">
         <picture data-foto="fachada-hierba"><source type="image/avif" srcset="img/fotos/fachada-hierba-480.avif 480w, img/fotos/fachada-hierba-800.avif 800w, img/fotos/fachada-hierba-1024.avif 1024w, img/fotos/fachada-hierba-1280.avif 1280w" sizes="(max-width: 799px) 80vw, 34vw"><source type="image/webp" srcset="img/fotos/fachada-hierba-480.webp 480w, img/fotos/fachada-hierba-800.webp 800w, img/fotos/fachada-hierba-1024.webp 1024w, img/fotos/fachada-hierba-1280.webp 1280w" sizes="(max-width: 799px) 80vw, 34vw"><img src="img/fotos/fachada-hierba-800.jpg" srcset="img/fotos/fachada-hierba-480.jpg 480w, img/fotos/fachada-hierba-800.jpg 800w, img/fotos/fachada-hierba-1024.jpg 1024w, img/fotos/fachada-hierba-1280.jpg 1280w" sizes="(max-width: 799px) 80vw, 34vw" width="1280" height="1707" alt="La casona con su linterna detrás de la hierba alta, bajo un cielo azul con nubes" loading="lazy" decoding="async"></picture>
@@ -272,12 +276,12 @@
       <!-- respaldo: la fachada, sus usos y el texto -->
       <div class="env vidas__respaldo">
         <figure class="vidas__f">
-          <button type="button" class="foto-btn" data-visor="fachada-frente" aria-label="Ver más grande: la fachada principal"><picture data-foto="fachada-frente"><source type="image/avif" srcset="img/fotos/fachada-frente-480.avif 480w, img/fotos/fachada-frente-800.avif 800w, img/fotos/fachada-frente-1024.avif 1024w, img/fotos/fachada-frente-1280.avif 1280w, img/fotos/fachada-frente-1600.avif 1600w" sizes="(max-width: 899px) 92vw, 56vw"><source type="image/webp" srcset="img/fotos/fachada-frente-480.webp 480w, img/fotos/fachada-frente-800.webp 800w, img/fotos/fachada-frente-1024.webp 1024w, img/fotos/fachada-frente-1280.webp 1280w, img/fotos/fachada-frente-1600.webp 1600w" sizes="(max-width: 899px) 92vw, 56vw"><img src="img/fotos/fachada-frente-800.jpg" srcset="img/fotos/fachada-frente-480.jpg 480w, img/fotos/fachada-frente-800.jpg 800w, img/fotos/fachada-frente-1024.jpg 1024w, img/fotos/fachada-frente-1280.jpg 1280w, img/fotos/fachada-frente-1600.jpg 1600w" sizes="(max-width: 899px) 92vw, 56vw" width="1600" height="900" alt="La fachada principal de pizarra y piedra: cornisa blanca, frontón con la placa, balcón de hierro sobre la puerta de arco, ocho ventanas y la linterna asomando detrás" loading="lazy" decoding="async"></picture></button>
+          <button type="button" class="foto-btn" data-visor="fachada-frente" aria-label="Ver más grande: la fachada principal"><picture data-foto="fachada-frente"><source type="image/avif" srcset="img/fotos/fachada-frente-480.avif 480w, img/fotos/fachada-frente-800.avif 800w, img/fotos/fachada-frente-1024.avif 1024w, img/fotos/fachada-frente-1280.avif 1280w, img/fotos/fachada-frente-1600.avif 1600w" sizes="(max-width: 899px) 92vw, 56vw"><source type="image/webp" srcset="img/fotos/fachada-frente-480.webp 480w, img/fotos/fachada-frente-800.webp 800w, img/fotos/fachada-frente-1024.webp 1024w, img/fotos/fachada-frente-1280.webp 1280w, img/fotos/fachada-frente-1600.webp 1600w" sizes="(max-width: 899px) 92vw, 56vw"><img src="img/fotos/fachada-frente-800.jpg" srcset="img/fotos/fachada-frente-480.jpg 480w, img/fotos/fachada-frente-800.jpg 800w, img/fotos/fachada-frente-1024.jpg 1024w, img/fotos/fachada-frente-1280.jpg 1280w, img/fotos/fachada-frente-1600.jpg 1600w" sizes="(max-width: 899px) 92vw, 56vw" width="1600" height="900" alt="La fachada principal de pizarra y piedra: cornisa blanca, frontón con la placa, balcón de hierro sobre la puerta de arco, cuatro ventanas y la linterna asomando detrás" loading="lazy" decoding="async"></picture></button>
         </figure>
         <ol class="vidas__lista">
           <li>
             <p class="vidas__placa">Ayuntamiento</p>
-            <p>Lo construyeron a principios del siglo XX para ser el ayuntamiento de San Martín de Oscos.</p>
+            <p>Se construyó a principios del siglo XX y fue el ayuntamiento de San Martín de Oscos.</p>
           </li>
           <li>
             <p class="vidas__placa">Y también fue</p>
@@ -505,19 +509,19 @@
   <section id="oscos" class="oscos" aria-labelledby="t-oscos">
     <div class="env oscos__cab">
       <p class="eyebrow">Los Oscos</p>
-      <h2 id="t-oscos" data-partir>El valle <em>del Ahío</em></h2>
+      <h2 id="t-oscos" data-partir>Los Oscos, <em>siguiendo el agua</em></h2>
       <p class="sec-cab__txt">San Martín, Santa Eulalia y Villanueva de Oscos forman Los Oscos, dentro de la Reserva de la Biosfera Río Eo, Oscos y Terras de Burón (UNESCO, 2007).</p>
     </div>
     <div class="oscos__modulo" data-modulo="ruta">
       <!-- respaldo: el plano (si el módulo Ruta ya lo ha dejado) y los lugares -->
       <div class="env oscos__respaldo">
-        <picture><source type="image/webp" srcset="img/terreno/plano.webp"><img class="oscos__plano" src="img/terreno/plano.jpg" width="1800" height="1264" alt="Plano del valle del río Ahío sobre el relieve y la foto aérea, con San Martín de Oscos, Santa Eulalia y Villanueva de Oscos, la Seimeira, Mazonovo y el Palacio de Mon" loading="lazy" decoding="async"></picture>
+        <picture><source type="image/webp" srcset="img/terreno/plano.webp"><img class="oscos__plano" src="img/terreno/plano.jpg" width="1800" height="1264" alt="Plano de Los Oscos con el río Ahío sobre el relieve y la foto aérea, con San Martín de Oscos, Santa Eulalia y Villanueva de Oscos, la Seimeira, Mazonovo y el Palacio de Mon" loading="lazy" decoding="async"></picture>
         <ul class="oscos__lista">
-          <li><b>Santa Eulalia de Oscos</b><span>El concejo vecino, de donde es Ena.</span><span class="dist" data-dist="Santa Eulalia de Oscos">10 km · 15 min en coche</span></li>
-          <li><b>Villanueva de Oscos</b><span>El tercero de Los Oscos.</span><span class="dist" data-dist="Villanueva de Oscos">7,8 km · 8 min en coche</span></li>
-          <li><b>La Seimeira</b><span>La cascada, desde Pumares.</span><span class="dist" data-dist="Seimeira">12 km · 17 min en coche</span></li>
-          <li><b>Mazonovo</b><span>El mazo, en Santa Eulalia.</span><span class="dist" data-dist="Mazonovo">13 km · 19 min en coche</span></li>
-          <li><b>Palacio de Mon</b><span>Del siglo XVIII, sobre el Ahío.</span><span class="dist" data-dist="Mon">4,7 km · 9 min en coche</span></li>
+          <li><b>Santa Eulalia de Oscos</b><span>El concejo vecino, de donde es Ena.</span><span class="dist" data-dist="Santa Eulalia de Oscos">10 km por carretera</span></li>
+          <li><b>Villanueva de Oscos</b><span>El tercero de Los Oscos.</span><span class="dist" data-dist="Villanueva de Oscos">7,8 km por carretera</span></li>
+          <li><b>La Seimeira</b><span>La cascada, desde Pumares.</span><span class="dist" data-dist="Seimeira" data-pie="(hasta Pumares)">11,5 km por carretera (hasta Pumares)</span></li>
+          <li><b>Mazonovo</b><span>El mazo, en Santa Eulalia.</span><span class="dist" data-dist="Mazonovo">12,7 km por carretera</span></li>
+          <li><b>Palacio de Mon</b><span>Del siglo XVIII, cerca del Ahío.</span><span class="dist" data-dist="Palacio de Mon">4,7 km por carretera</span></li>
         </ul>
       </div>
     </div>
@@ -566,12 +570,12 @@
           <div class="cerca">
             <h3>Cerca</h3>
             <ul class="cerca__lista">
-              <li><b>Mazonovo</b><span>El mazo de Santa Eulalia.</span><span class="dist" data-dist="Mazonovo">13 km · 19 min en coche</span></li>
-              <li><b>Casa Natal del Marqués de Sargadelos</b><span>Museo en Ferreirela de Baxo.</span><span class="dist" data-dist="Sargadelos">11 km · 18 min en coche</span></li>
-              <li><b>Casa del Marco</b><span>En Villarquille.</span><span class="dist" data-dist="Casa del Marco">5,2 km · 8 min en coche</span></li>
-              <li><b>Mirador de A Paicega</b><span>En Pesoz.</span><span class="dist" data-dist="Paicega">19 km · 23 min en coche</span></li>
-              <li><b>Presa de Salime</b><span class="dist" data-dist="Salime">26 km · 24 min en coche</span></li>
-              <li><b>Taramundi</b><span class="dist" data-dist="Taramundi">28 km · 28 min en coche</span></li>
+              <li><b>Mazonovo</b><span>El mazo de Santa Eulalia.</span><span class="dist" data-dist="Mazonovo">12,7 km por carretera</span></li>
+              <li><b>Casa Natal del Marqués de Sargadelos</b><span>Museo en Ferreirela de Baxo.</span><span class="dist" data-dist="Sargadelos">10,8 km por carretera</span></li>
+              <li><b>Casa del Marco</b><span>En Villarquille.</span><span class="dist" data-dist="Casa del Marco">5,2 km por carretera</span></li>
+              <li><b>Mirador de A Paicega</b><span>En Pesoz.</span><span class="dist" data-dist="Paicega">18,7 km por carretera</span></li>
+              <li><b>Presa de Salime</b><span class="dist" data-dist="Salime">26 km por carretera</span></li>
+              <li><b>Taramundi</b><span class="dist" data-dist="Taramundi">28 km por carretera</span></li>
             </ul>
             <h3>En el pueblo</h3>
             <p class="pueblo">Casa Bonilla (bar restaurante) · El Pequenón (tienda bar) · supermercado · farmacia · gasolinera 24 h · cajero · consultorio · oficina de turismo · parque infantil · piscina en verano.</p>
@@ -770,12 +774,14 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
 <!-- los módulos (cada uno en su archivo; si falta alguno, construir.mjs quita su etiqueta y se queda el respaldo del HTML) -->
-<script src="js/niebla.js?v=ed989c5f" defer></script>
-<script src="js/linterna.js?v=c962fb3d" defer></script>
-<script src="js/fachada.js?v=326ef5de" defer></script>
+<script src="js/niebla.js?v=5ef7387a" defer></script>
+<script src="js/linterna.js?v=b67b51c1" defer></script>
+<script src="js/fachada.js?v=1d9cb48d" defer></script>
+<script src="js/hilo.js?v=a952678c" defer></script>
 <!-- la web -->
-<script src="js/main.js?v=0b56b058" defer></script>
+<script src="js/reserva.js?v=0cadfeb0" defer></script>
+<script src="js/main.js?v=3a29f0e9" defer></script>
 <!-- el 3D de «Los Oscos»: módulo diferido; si no carga, se queda el plano -->
-<script type="module" src="js/3d/arranque.js?v=4dab9f2f" onerror="var r=document.getElementById('oscos');if(r)r.classList.add('sin-3d')"></script>
+<script type="module" src="js/3d/arranque.js?v=3f623445" onerror="var r=document.getElementById('oscos');if(r)r.classList.add('sin-3d')"></script>
 </body>
 </html>

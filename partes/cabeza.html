@@ -8,7 +8,7 @@
     var q = new URLSearchParams(location.search);
     if (q.has('revision')) {
       h.classList.add('revision');
-      if (q.get('densidad') === 'sobria') h.classList.add('densidad-sobria');
+      if (q.get('densidad') === 'sobria') { h.classList.add('densidad-sobria'); h.setAttribute('data-densidad', 'sobria'); }
     }
   } catch (e) {}
   // El puente con la cortina: existe desde el primer momento, cargue antes quien cargue.
@@ -28,6 +28,7 @@
     if (A.cortinaFuera) return;
     A.cortinaFuera = true;
     clearTimeout(window.__redCortina);
+    try { if (A.cortina && !A.cortina.fuera && A.cortina.retirar) A.cortina.retirar(); } catch (e) {}
     h.classList.remove('cortina-activa');
     h.classList.add('cortina-fuera');
     A.abrir();
@@ -36,7 +37,9 @@
   d.addEventListener('ahio:cortina-abre', function () { A.abrir(); });
   d.addEventListener('ahio:cortina-fuera', function () { A.retirarCortina(); });
   // red de seguridad por si main.js o la cortina no llegan: la cortina se va sola
-  window.__redCortina = setTimeout(function () { A.retirarCortina(); }, 6500);
+  // (si la cortina sigue en marcha, Ahio.cortina.enMarcha, se le deja acabar: espera hasta 12 s)
+  var red = function (t) { window.__redCortina = setTimeout(function () { if (A.cortina && A.cortina.enMarcha && !A.cortina.fuera && t < 12000) red(t + 1000); else A.retirarCortina(); }, t ? 1000 : 6500); };
+  red(0);
 })(document);
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">

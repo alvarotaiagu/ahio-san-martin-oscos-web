@@ -196,11 +196,9 @@
     if (ST) ST.refresh();
   }
   const portadaLinterna = $('#portada [data-modulo="linterna"]');
-  // la portada espera a la cortina; mientras, cuenta como «esperando» solo si ya se abrió
-  const cercanos = new Set();
   if ('IntersectionObserver' in window) {
     const ioMod = new IntersectionObserver((es) => es.forEach((e) => {
-      if (e.isIntersecting) { ioMod.unobserve(e.target); cercanos.add(e.target); montarModulo(e.target); }
+      if (e.isIntersecting) { ioMod.unobserve(e.target); montarModulo(e.target); }
     }), { rootMargin: '900px 0px' });
     $$('[data-modulo]').forEach((el) => { if (el !== portadaLinterna) ioMod.observe(el); });
   } else $$('[data-modulo]').forEach((el) => { if (el !== portadaLinterna) montarModulo(el); });
@@ -220,7 +218,7 @@
     if (G) G.ticker.lagSmoothing(0);      // al retirar la cortina, nunca antes
     if (ST) ST.refresh();
     mostrarCookies();
-    alScroll();
+    requestAnimationFrame(() => alScroll());   // un fotograma después: la cortina puede salir antes de que se declare lo de la sección 10
   }
   document.addEventListener('ahio:fuera', alSalir);
   const retirarCortina = () => { A.retirarCortina(); alSalir(); };
@@ -309,9 +307,11 @@
   // JS no ha llegado, fuera ya.
   if (A.cortina && A.cortina.fuera) retirarCortina();
   if (A.cortina && typeof A.cortina.alAbrirse === 'function') A.cortina.alAbrirse(() => A.abrir());
-  if (!cortina || !motion || !A.linterna) retirarCortina();
-  // red de seguridad propia por si la cortina se atasca
-  setTimeout(retirarCortina, 7000);
+  // (nunca mientras Ahio.cortina.enMarcha: la cortina se retira sola; la red de seguridad espera hasta 12 s)
+  const enMarcha = () => !!(A.cortina && A.cortina.enMarcha && !A.cortina.fuera);
+  if (!cortina || !motion || (!A.linterna && !enMarcha())) retirarCortina();
+  const red = (t) => setTimeout(() => { if (enMarcha() && t < 12000) red(t + 1000); else retirarCortina(); }, t ? 1000 : 7000);
+  red(0);
 
   /* ============ 8. mapa de Google solo al pedirlo ============ */
   $('#mapa-btn').addEventListener('click', () => {
@@ -398,6 +398,7 @@
     botones.forEach((b) => b.addEventListener('click', () => {
       const antes = sobria();
       raiz.classList.toggle('densidad-sobria', b.dataset.densidad === 'sobria');
+      if (sobria()) raiz.setAttribute('data-densidad', 'sobria'); else raiz.removeAttribute('data-densidad');
       const u = new URL(location.href);
       if (b.dataset.densidad === 'sobria') u.searchParams.set('densidad', 'sobria'); else u.searchParams.delete('densidad');
       history.replaceState(null, '', u);

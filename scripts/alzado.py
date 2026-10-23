@@ -189,18 +189,30 @@ def piedra(azar, huecos):
     return t
 
 
-def pizarra_tejado(azar, x0, x1, y0, y1, semi_arriba):
-    """Hiladas de losa en el faldón (trapecio): líneas con cortes, en el ancho de cada altura."""
+def pizarra_tejado(azar, x0, x1, y0, y1, semi_arriba, hastial=None):
+    """Hiladas de losa en el faldón (trapecio): líneas con cortes, en el ancho de cada altura.
+    `hastial` = (cumbre, base, semiancho): triángulo delante del faldón (frontón o buharda) que tapa las hiladas."""
     t = Trazo()
     y = y0 - 16
     while y > y1 + 6:
         f = (y0 - y) / (y0 - y1)
         a = x0 + (EJE - semi_arriba - x0) * f
         b = x1 - (x1 - (EJE + semi_arriba)) * f
+        hueco = None
+        if hastial and hastial[0] - 4 < y < hastial[1] + 4:
+            hs = hastial[2] * (y - hastial[0]) / (hastial[1] - hastial[0]) + 10
+            hueco = (EJE - hs, EJE + hs)
         x = a + azar.uniform(4, 30)
         while x < b - 10:
             largo = azar.uniform(60, 220)
-            t.linea((x, y), (min(x + largo, b - 6), y))
+            xa, xb = x, min(x + largo, b - 6)
+            if hueco and xb > hueco[0] and xa < hueco[1]:
+                if xa < hueco[0]:
+                    t.linea((xa, y), (hueco[0], y))
+                if xb > hueco[1]:
+                    t.linea((hueco[1], y), (xb, y))
+            else:
+                t.linea((xa, y), (xb, y))
             x += largo + azar.uniform(8, 20)
         y -= azar.uniform(15, 19)
     return t
@@ -240,13 +252,13 @@ def linterna(t, vid, chim, tex_piz, azar):
     return vidrios
 
 
-def tejado(t, tex, azar, x0, x1):
+def tejado(t, tex, azar, x0, x1, hastial=None):
     """Alero con canecillos y faldón (a cuatro aguas visto de frente: un trapecio)."""
     t.linea((x0 - VUELO, ALERO), (x1 + VUELO, ALERO))
     t.linea((x0 - VUELO, ALERO), (x0 - VUELO, ALERO_B), (x1 + VUELO, ALERO_B), (x1 + VUELO, ALERO))
     semi = LINT['semi'] + 75
     t.linea((x0 - VUELO + 6, ALERO), (EJE - semi, CUM_TEJADO), (EJE + semi, CUM_TEJADO), (x1 + VUELO - 6, ALERO))
-    return pizarra_tejado(azar, x0 - VUELO + 6, x1 + VUELO - 6, ALERO, CUM_TEJADO, semi)
+    return pizarra_tejado(azar, x0 - VUELO + 6, x1 + VUELO - 6, ALERO, CUM_TEJADO, semi, hastial)
 
 
 def canecillos(t, x0, x1, salto=None):
@@ -332,7 +344,7 @@ def cara_principal(azar, comprobar):
     lineas.linea((c1, ALERO_B), (c1, BANDA[1] + 8))
     # tejado, alero y canecillos
     tej = Trazo()
-    tex_piz = tejado(tej, None, azar, 0, ANCHO)
+    tex_piz = tejado(tej, None, azar, 0, ANCHO, (FRONTON['cumbre'], FRONTON['alero'], FRONTON['semi']))
     madera = Trazo()
     canecillos(madera, 0, ANCHO, (EJE - FRONTON['semi'], EJE + FRONTON['semi']))
     # linterna (detrás) y chimeneas
@@ -485,7 +497,7 @@ def cara_lateral(azar, comprobar):
     corn.linea((0, BANDA[0] + 22), (ANCHO, BANDA[0] + 22))
     corn.linea((0, BANDA[1] - 18), (ANCHO, BANDA[1] - 18))
     tej = Trazo()
-    tex_piz = tejado(tej, None, azar, 0, ANCHO)
+    tex_piz = tejado(tej, None, azar, 0, ANCHO, (150, ALERO - 8, 150))
     madera = Trazo()
     # buharda en el faldón (en la foto lateral asoma una, con su vidriera triangular)
     bu = Trazo()

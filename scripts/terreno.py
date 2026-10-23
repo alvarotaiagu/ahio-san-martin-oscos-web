@@ -225,7 +225,8 @@ print('Mazo de Mon a', round(d_mazo), 'm del Ahío (i', i_mazo, ') · palacio de
 km = lambda i: round(i * PASO / 1000, 1)
 TRAMOS = [
     {'i': 0, 'k': 'nace', 't': f'El Ahío nace al norte del concejo, a {round(H[0])} m'},
-    {'i': max(1, i_mazo - 150), 'k': 'baja', 't': 'Baja hacia el sur entre montes, cada vez más encajado'},
+    {'i': 125, 'k': 'baja', 't': f'Baja deprisa hacia el sur: {round((H[0] - H[125]) / 10) * 10} m de desnivel en el primer kilómetro y medio'},
+    {'i': 420, 'k': 'valle', 't': f'Sigue al sur por el fondo del valle, ya a {round(H[420])} m'},
     {'i': i_mazo, 'k': 'mazo', 't': f'Pasa por el Mazo de Mon, a {round(H[i_mazo])} m'},
     {'i': lim[1], 'k': 'boca', 't': f'Se junta con el Agüeira, a {round(H[lim[1]])} m'},
     {'i': lim[1] + 1, 'k': 'remonta', 't': 'Desde ahí, el hilo remonta el agua: Agüeira arriba'},

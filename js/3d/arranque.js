@@ -41,7 +41,7 @@ const cortinaFuera = () => Promise.race([
 const POSTER = `
       <picture class="ruta-poster">
         <source type="image/webp" srcset="${IMG}plano-base.webp${V}">
-        <img id="ruta-poster" src="${IMG}plano-base.jpg${V}" alt="" width="1800" height="1262" decoding="async">
+        <img id="ruta-poster" src="${IMG}plano-base.jpg${V}" alt="" width="1800" height="1264" decoding="async">
       </picture>`;
 const MARCADO = (quieto, poster) => `
   <div class="ruta-fijo">

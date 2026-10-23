@@ -510,7 +510,7 @@
       el.appendChild(velos);
       if (!vivo) el.dataset.quieto = '1';
       colocarLuz();
-      el.style.setProperty('--densidad', String(densidad * factorSobria));
+      el.style.setProperty('--densidad', (densidad * factorSobria).toFixed(3));
       alScroll();
     }
     function colocarLuz() {
@@ -553,7 +553,7 @@
       el.dataset.tiempo = t ? t.clave : 'sin-dato';
       el.dataset.niebla = (densidad * factorSobria).toFixed(2);
       if (motor) motor.densidad(densidad * factorSobria);
-      el.style.setProperty('--densidad', String(densidad * factorSobria));
+      el.style.setProperty('--densidad', (densidad * factorSobria).toFixed(3));
       escribirTiempo(t);
     });
 

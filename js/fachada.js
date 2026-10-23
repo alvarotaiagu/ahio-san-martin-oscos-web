@@ -118,6 +118,10 @@
     antiguo: 'Foto antigua en blanco y negro: una calle mojada de San Martín de Oscos, una mujer que camina y, al fondo, el edificio'
   };
 
+  // pie literal de su web (página san-martin-de-oscos); el autor no consta
+  var PIE_ANTIGUO = 'Antiguo ayuntamiento. Al fondo de la imagen, se ve el edificio donde hoy en día se encuentra Ahío San Martín.';
+  var FUENTE_ANTIGUO = 'Pie de la foto en la web de Ahío; autor por confirmar.';
+
   /* Las vidas (D). Los rótulos son los de la placa; ninguna fecha. */
   var USOS = ['CENTRO SOCIAL', 'BIBLIOTECA', 'CENTRO MÉDICO', 'CÁRCEL'];
   var VIDAS = [
@@ -253,10 +257,11 @@
     return pic;
   };
 
+  // una sola llamada: la web también escucha [data-reservar] y los enlaces a # en document
   var reservar = function (pref, ev) {
     var A = window.Ahio;
     if (A && typeof A.reservar === 'function') {
-      if (ev) ev.preventDefault();
+      if (ev) { ev.preventDefault(); ev.stopPropagation(); }
       A.reservar(pref);
     }
   };
@@ -308,7 +313,9 @@
       var h = '<div class="fx-vidas-pista"><div class="fx-vidas-escena">';
       h += '<div class="fx-vidas-arte"><figure class="fx-vidas-lamina"><div class="fx-vidas-dibujo"></div>' +
         '<figcaption class="fx-pie">Alzado de la fachada principal, dibujado a partir de una foto suya.</figcaption></figure>';
-      h += '<figure class="fx-vidas-foto"><div class="fx-vidas-foto-marco"></div><figcaption class="fx-pie">La fachada principal, hoy.</figcaption></figure></div>';
+      h += '<figure class="fx-vidas-foto"><div class="fx-vidas-foto-marco"></div><figcaption class="fx-pie">La fachada principal, hoy.</figcaption></figure>';
+      // la foto antigua, junto al dibujo (solo en el modo fijo; en lista va con su vida)
+      h += '<figure class="fx-antiguo fx-antiguo--arte"><div class="fx-antiguo-papel"></div><figcaption><q>' + PIE_ANTIGUO + '</q> <span class="fx-antiguo-fuente">' + FUENTE_ANTIGUO + '</span></figcaption></figure></div>';
       h += '<div class="fx-vidas-texto">';
       h += '<div class="fx-placa fx-placa--grande" aria-hidden="true"><div class="fx-placa-cara es-activa"></div><div class="fx-placa-cara"></div><i class="fx-placa-brillo"></i></div>';
       h += '<ol class="fx-vidas-lista">';
@@ -319,7 +326,7 @@
         h += '<h3 class="fx-vida-titulo">' + escapar(v.titulo) + '</h3>';
         if (v.usos) h += '<ul class="fx-usos" aria-label="Otros usos, sin orden">' + USOS.map(function (u) { return '<li>' + escapar(u.charAt(0) + u.slice(1).toLowerCase()) + '</li>'; }).join('') + '</ul>';
         h += '<p class="fx-vida-texto">' + escapar(v.texto) + '</p>';
-        if (i === 0) h += '<figure class="fx-antiguo"><div class="fx-antiguo-papel"></div><figcaption><q>Antiguo ayuntamiento. Al fondo de la imagen, se ve el edificio donde hoy en día se encuentra Ahío San Martín.</q> <span class="fx-antiguo-fuente">Pie de la foto en la web de Ahío; autor por confirmar.</span></figcaption></figure>';
+        if (i === 0) h += '<figure class="fx-antiguo fx-antiguo--vida"><div class="fx-antiguo-papel"></div><figcaption><q>' + PIE_ANTIGUO + '</q> <span class="fx-antiguo-fuente">' + FUENTE_ANTIGUO + '</span></figcaption></figure>';
         h += '</li>';
       });
       h += '</ol>';
@@ -345,10 +352,13 @@
 
       // fotos
       nodo.querySelector('.fx-vidas-foto-marco').appendChild(hacerFoto('fachada-frente', '(min-width: 900px) 30vw, calc(100vw - 32px)', ctx));
-      var ant = hacerFoto('antiguo', '248px', ctx);
-      var antImg = ant.tagName === 'IMG' ? ant : ant.querySelector('img');
-      if (antImg) { antImg.removeAttribute('sizes'); antImg.removeAttribute('srcset'); Array.prototype.forEach.call(ant.querySelectorAll ? ant.querySelectorAll('source') : [], function (s) { s.removeAttribute('sizes'); s.srcset = s.srcset.split(',')[0].split(' ')[0]; }); }
-      nodo.querySelector('.fx-antiguo-papel').appendChild(ant);
+      Array.prototype.forEach.call(nodo.querySelectorAll('.fx-antiguo-papel'), function (papelAnt) {
+        // a su tamaño (248 px): nunca más grande
+        var ant = hacerFoto('antiguo', '248px', ctx);
+        var antImg = ant.tagName === 'IMG' ? ant : ant.querySelector('img');
+        if (antImg) { antImg.removeAttribute('sizes'); antImg.removeAttribute('srcset'); Array.prototype.forEach.call(ant.querySelectorAll ? ant.querySelectorAll('source') : [], function (so) { so.removeAttribute('sizes'); so.srcset = so.srcset.split(',')[0].split(' ')[0]; }); }
+        papelAnt.appendChild(ant);
+      });
 
       var pista = nodo.querySelector('.fx-vidas-pista');
       var escena = nodo.querySelector('.fx-vidas-escena');
@@ -393,11 +403,12 @@
         nodo.dataset.rotulo = (uso != null ? USOS[uso] : lineas.join(' '));
       };
 
+      // el top del sticky y el recorrido no cambian al hacer scroll: se miden al cambiar de modo o de ancho
+      var medida = null;
       var progreso = function () {
+        if (!medida) medida = { top: parseFloat(getComputedStyle(escena).top) || 0, rec: pista.offsetHeight - escena.offsetHeight };
         var r = pista.getBoundingClientRect();
-        var top = parseFloat(getComputedStyle(escena).top) || 0;
-        var rec = pista.offsetHeight - escena.offsetHeight;
-        return rec > 0 ? lim((top - r.top) / rec) : 0;
+        return medida.rec > 0 ? lim((medida.top - r.top) / medida.rec) : 0;
       };
       var pintar = function (p) {
         var vida = p < CORTES[0] ? 0 : p < CORTES[1] ? 1 : p < CORTES[2] ? 2 : 3;
@@ -447,6 +458,7 @@
       var ponerModo = function () {
         var q = quietoDe(opc);
         var nuevo = q ? 'quieto' : (innerWidth >= 900 && innerHeight >= 560 && !stickyRoto(nodo) ? 'fijo' : 'suelto');
+        medida = null;
         if (nuevo === modo) return;
         modo = nuevo;
         nodo.dataset.modo = nuevo;
@@ -625,7 +637,14 @@
         var poner = function (nombre) {
           grande.innerHTML = '';
           var f = hacerFoto(nombre, '(min-width: 900px) 46vw, calc(100vw - 32px)', ctx, 'eager');
-          grande.appendChild(f);
+          // el visor de la web se abre por el nombre de la foto ([data-visor])
+          var ver = document.createElement('button');
+          ver.type = 'button';
+          ver.className = 'foto-btn fx-ficha-ver';
+          ver.dataset.visor = nombre;
+          ver.setAttribute('aria-label', 'Ver más grande: ' + (ALT[nombre] || nombre));
+          ver.appendChild(f);
+          grande.appendChild(ver);
           grande.dataset.foto = nombre;
           Array.prototype.forEach.call(mini.querySelectorAll('button'), function (b) { b.setAttribute('aria-pressed', b.dataset.foto === nombre ? 'true' : 'false'); });
         };
