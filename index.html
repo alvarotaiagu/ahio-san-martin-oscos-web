@@ -58,9 +58,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Gilda+Display&family=Wix+Madefor+Text:wght@400..600&display=swap">
 <link rel="stylesheet" href="css/estilos.css?v=c1cb4ee9">
 <link rel="stylesheet" href="css/entrada.css?v=b8565344">
-<link rel="stylesheet" href="css/fachada.css?v=c0ffd516">
-<link rel="stylesheet" href="css/hilo.css?v=b4d7e9f9">
-<link rel="stylesheet" href="css/3d.css?v=1405bd5d">
+<!-- las hojas de las secciones de más abajo no bloquean el primer pintado (LCP de la portada) -->
+<link rel="stylesheet" href="css/fachada.css?v=c0ffd516" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/hilo.css?v=b4d7e9f9" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/3d.css?v=1405bd5d" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="css/fachada.css?v=c0ffd516"><link rel="stylesheet" href="css/hilo.css?v=b4d7e9f9"><link rel="stylesheet" href="css/3d.css?v=1405bd5d"></noscript>
 <link rel="icon" href="marca/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="marca/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="marca/apple-touch-icon.png">

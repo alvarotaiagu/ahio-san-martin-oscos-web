@@ -6,6 +6,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
+import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 
 const require = createRequire('C:/Users/alvar/Desktop/WEBS NEGOCIOS/alvarotaiagu.github.io/');
@@ -16,8 +17,11 @@ const srv = http.createServer((req, res) => {
   let p = decodeURIComponent(req.url.split('?')[0]); if (p === '/') p = '/index.html';
   const f = path.join(RAIZ, p);
   if (!f.startsWith(RAIZ) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); res.end('no'); return; }
-  res.writeHead(200, { 'Content-Type': TIPOS[path.extname(f)] || 'application/octet-stream' });
-  fs.createReadStream(f).pipe(res);
+  // como GitHub Pages: el texto (HTML, CSS, JS, JSON, SVG) va comprimido con gzip; sin esto el LCP medido sale peor que el real
+  const tipo = TIPOS[path.extname(f)] || 'application/octet-stream';
+  const gz = /text|javascript|json|svg/.test(tipo) && /gzip/.test(req.headers['accept-encoding'] || '');
+  res.writeHead(200, gz ? { 'Content-Type': tipo, 'Content-Encoding': 'gzip', 'Vary': 'Accept-Encoding' } : { 'Content-Type': tipo });
+  (gz ? fs.createReadStream(f).pipe(zlib.createGzip()) : fs.createReadStream(f)).pipe(res);
 });
 await new Promise((r) => srv.listen(8872, r));
 const CACHE = path.join(os.tmpdir(), 'ahio-cdn');

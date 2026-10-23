@@ -47,9 +47,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Gilda+Display&family=Wix+Madefor+Text:wght@400..600&display=swap">
 <link rel="stylesheet" href="css/estilos.css">
 <link rel="stylesheet" href="css/entrada.css">
-<link rel="stylesheet" href="css/fachada.css">
-<link rel="stylesheet" href="css/hilo.css">
-<link rel="stylesheet" href="css/3d.css">
+<!-- las hojas de las secciones de más abajo no bloquean el primer pintado (LCP de la portada) -->
+<link rel="stylesheet" href="css/fachada.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/hilo.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/3d.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="css/fachada.css"><link rel="stylesheet" href="css/hilo.css"><link rel="stylesheet" href="css/3d.css"></noscript>
 <link rel="icon" href="marca/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="marca/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="marca/apple-touch-icon.png">
