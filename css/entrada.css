@@ -1,0 +1,132 @@
+/* ------------------------------------------------------------------
+   Ahío San Martín · Entrada (agente Entrada): la cortina «La linterna en
+   la niebla» y la portada (niebla viva sobre la foto). Todo bajo #cortina
+   o [data-modulo="linterna"]; colores y letras de la web con var(--x, valor)
+   por si estilos.css aún no está.
+   ------------------------------------------------------------------ */
+
+/* ================= cortina =================
+   Solo se ve con html.cortina-activa (lo pone el script de la parte): sin JS no aparece nunca.
+   Niebla de madrugada: gris azulado frío y oscuro (las líneas en crema y la luz ámbar tienen que leerse). */
+#cortina.cortina {
+  position: fixed; inset: 0; z-index: 1000; display: none;
+  width: 100%; height: 100%; overflow: hidden;
+  background:
+    radial-gradient(70% 55% at 50% 40%, rgb(122 136 146 / .55), transparent 70%),
+    linear-gradient(180deg, #36424B 0%, #4C5A63 46%, #68767E 100%);
+  color: var(--crema, #FAF6E1);
+  contain: strict;
+}
+html.cortina-activa #cortina.cortina { display: block; }
+#cortina.cortina[hidden], html.cortina-fuera #cortina.cortina { display: none !important; }
+@media (prefers-reduced-motion: reduce) { #cortina.cortina { display: none !important; } }
+html.cortina-activa, html.cortina-activa body { overflow: hidden; }
+/* el lienzo ya pinta la niebla: el fondo del elemento se aparta (si no, el agujero no destapa nada) */
+#cortina.es-lienzo { background: transparent; }
+#cortina.es-abriendo { pointer-events: none; }
+#cortina .cortina__lienzo { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+#cortina .cortina__centro {
+  position: absolute; inset: 0; display: grid; place-content: center; justify-items: center;
+  padding: 0 16px 5svh; text-align: center; pointer-events: none;
+}
+#cortina .cortina__casa {
+  display: block; width: clamp(150px, 34vmin, 290px); height: auto; overflow: visible;
+  transform-origin: 0 0; will-change: transform;
+}
+#cortina .cortina__casa .cortina__trazo {
+  fill: none; stroke: var(--crema, #FAF6E1); stroke-width: 5.3;
+  stroke-linecap: square; stroke-linejoin: miter; stroke-miterlimit: 4;
+  stroke-dasharray: 1; stroke-dashoffset: 0;
+}
+#cortina .cortina__casa .cortina__cristal { fill: var(--linterna, #F2B84B); opacity: 0; }
+#cortina .cortina__nombre {
+  margin: clamp(18px, 3.4vh, 30px) 0 0;
+  font: 400 clamp(1.9rem, 6.2vw, 3.3rem)/1.05 var(--letra-titular, 'Gilda Display', 'Times New Roman', Georgia, serif);
+  letter-spacing: .01em; color: var(--crema, #FAF6E1);
+}
+#cortina .cortina__linea {
+  margin: 12px 0 0; max-width: 32ch;
+  font: 400 clamp(.68rem, 2.6vw, .8rem)/1.5 var(--letra-placa, 'Castoro Titling', 'Gilda Display', Georgia, serif);
+  letter-spacing: .2em; text-transform: uppercase; color: #D7DCDA;
+}
+/* la luz del respaldo (si el lienzo no arranca): un halo en CSS sobre la linterna */
+#cortina .cortina__luz {
+  position: absolute; left: var(--lx, 50%); top: var(--ly, 40%); width: 120vmax; height: 120vmax;
+  margin: -60vmax 0 0 -60vmax; border-radius: 50%; pointer-events: none; opacity: 0;
+  background: radial-gradient(closest-side, rgb(242 184 75 / .55), rgb(242 184 75 / .16) 22%, rgb(242 170 70 / .05) 50%, transparent 72%);
+  mix-blend-mode: screen;
+}
+#cortina.es-lienzo .cortina__luz { display: none; }
+
+/* sin que el JS tome el mando (red de seguridad de la parte): el dibujo ya hecho aparece a los 1,3 s */
+#cortina:not(.es-js) .cortina__centro { opacity: 0; animation: cortina-respaldo .5s ease 1.3s forwards; }
+@keyframes cortina-respaldo { to { opacity: 1; } }
+/* con el JS: todo empieza oculto (lo que aparece en un paso no puede estar pintado en el anterior) */
+#cortina.es-js .cortina__trazo { stroke-dashoffset: 1; opacity: 0; }
+#cortina.es-js .cortina__nombre, #cortina.es-js .cortina__linea { opacity: 0; }
+
+/* mientras el dibujo vuela a la cabecera, el logo real espera escondido (la parte quita la clase al retirar) */
+html.cortina-vuela [data-logo-cortina] { visibility: hidden; }
+
+/* ================= portada: la niebla sobre la foto =================
+   Respaldo sin JS (o antes de montar): la foto con un velo de niebla en degradados (no son imágenes:
+   no compiten por el LCP). Al montar con WebGL, el lienzo lo sustituye; sin WebGL, dos capas de
+   textura que derivan despacio y se desvanecen con el scroll. */
+:where([data-modulo="linterna"]) { position: relative; }
+[data-modulo="linterna"]::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgb(226 231 232 / .34) 0%, rgb(226 231 232 / 0) 30%),
+    linear-gradient(0deg, rgb(232 236 236 / .5) 0%, rgb(232 236 236 / .14) 26%, rgb(232 236 236 / 0) 46%),
+    radial-gradient(60% 34% at 12% 30%, rgb(236 239 239 / .32), transparent 70%),
+    radial-gradient(52% 30% at 92% 42%, rgb(236 239 239 / .3), transparent 70%);
+  transition: opacity .9s ease;
+}
+[data-modulo="linterna"][data-motor="webgl"]::after,
+[data-modulo="linterna"][data-motor="css"]::after { opacity: 0; }
+
+[data-modulo="linterna"] .linterna__niebla {
+  position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; display: block;
+  pointer-events: none; opacity: 0; transition: opacity .5s ease;
+}
+[data-modulo="linterna"] .linterna__niebla.es-lista { opacity: 1; }
+/* el gesto: el dedo abre la niebla de lado; el scroll vertical sigue siendo del navegador */
+[data-modulo="linterna"][data-gesto="1"] { touch-action: pan-y pinch-zoom; }
+
+/* respaldo sin WebGL: dos capas de niebla (textura generada, img/entrada/niebla-*.webp) y la luz en CSS */
+[data-modulo="linterna"] .linterna__velo {
+  position: absolute; z-index: 2; left: 0; top: 0; width: 200%; height: 100%; pointer-events: none;
+  background-repeat: repeat-x; will-change: transform;
+}
+[data-modulo="linterna"] .linterna__velo--a {
+  background-image: url(../img/entrada/niebla-a.webp); background-size: 50% 100%;
+  opacity: calc(var(--densidad, .5) * 1.05);
+  -webkit-mask: linear-gradient(180deg, #000 0%, rgb(0 0 0 / .45) 40%, rgb(0 0 0 / .35) 60%, #000 100%);
+  mask: linear-gradient(180deg, #000 0%, rgb(0 0 0 / .45) 40%, rgb(0 0 0 / .35) 60%, #000 100%);
+  animation: linterna-deriva 120s linear infinite;
+}
+[data-modulo="linterna"] .linterna__velo--b {
+  top: 38%; height: 62%;
+  background-image: url(../img/entrada/niebla-b.webp); background-size: 36% 100%;
+  opacity: calc(var(--densidad, .5) * .9);
+  -webkit-mask: linear-gradient(180deg, transparent 0%, #000 45%);
+  mask: linear-gradient(180deg, transparent 0%, #000 45%);
+  animation: linterna-deriva 75s linear infinite reverse;
+}
+[data-modulo="linterna"] .linterna__velos { position: absolute; inset: 0; z-index: 2; overflow: hidden; pointer-events: none; }
+@keyframes linterna-deriva { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+[data-modulo="linterna"] .linterna__luz {
+  position: absolute; z-index: 3; left: var(--lx, 45%); top: var(--ly, 21%);
+  width: 46vmin; height: 46vmin; margin: -23vmin 0 0 -23vmin; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgb(255 214 140 / .62), rgb(242 184 75 / .3) 26%, rgb(242 184 75 / .08) 58%, transparent);
+  mix-blend-mode: screen; opacity: .85;
+  animation: linterna-respira 5.5s ease-in-out infinite alternate;
+}
+@keyframes linterna-respira { from { opacity: .62; transform: scale(.94); } to { opacity: .9; transform: scale(1.04); } }
+[data-modulo="linterna"][data-quieto="1"] .linterna__velo,
+[data-modulo="linterna"][data-quieto="1"] .linterna__luz { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-modulo="linterna"] .linterna__velo, [data-modulo="linterna"] .linterna__luz { animation: none; }
+  [data-modulo="linterna"] .linterna__niebla, [data-modulo="linterna"]::after { transition: none; }
+}

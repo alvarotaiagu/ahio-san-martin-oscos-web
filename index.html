@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ahío San Martín · apartamentos rurales en el antiguo ayuntamiento de San Martín de Oscos</title>
+<meta name="description" content="Ocho apartamentos rurales dobles en el antiguo ayuntamiento de San Martín de Oscos (Asturias): dos en planta baja, seis dúplex, hasta dos supletorias y mascotas bienvenidas. Los lleva Ena Mateos.">
+<meta property="og:title" content="Ahío San Martín · el antiguo ayuntamiento de San Martín de Oscos">
+<meta property="og:description" content="Ocho apartamentos rurales en una casona de pizarra de principios del siglo XX, con una linterna en lo alto del tejado. Los Oscos, Asturias.">
+<link rel="preload" as="image" type="image/avif" imagesrcset="img/fotos/niebla-fachada-480.avif 480w, img/fotos/niebla-fachada-800.avif 800w, img/fotos/niebla-fachada-1024.avif 1024w, img/fotos/niebla-fachada-1280.avif 1280w, img/fotos/niebla-fachada-1600.avif 1600w" imagesizes="100vw" fetchpriority="high">
+<!-- script bloqueante: clases antes del primer pintado y el puente con la cortina (módulo Entrada: js/linterna.js) -->
+<script>
+(function (d) {
+  var h = d.documentElement;
+  h.classList.add('js');
+  // MANDO DE MAQUETA (no viaja al cliente): solo con ?revision
+  try {
+    var q = new URLSearchParams(location.search);
+    if (q.has('revision')) {
+      h.classList.add('revision');
+      if (q.get('densidad') === 'sobria') h.classList.add('densidad-sobria');
+    }
+  } catch (e) {}
+  // El puente con la cortina: existe desde el primer momento, cargue antes quien cargue.
+  // La cortina (Entrada) llama a Ahio.abrir() cuando EMPIEZA a abrirse y a Ahio.retirarCortina() al acabar
+  // (o lanza ahio:cortina-abre / ahio:cortina-fuera). La web y los módulos usan Ahio.alAbrirse(fn).
+  var A = window.Ahio = window.Ahio || {};
+  var cola = [];
+  var avisar = function (n) { try { d.dispatchEvent(new CustomEvent(n)); } catch (e) {} };
+  A.alAbrirse = function (fn) { if (A.abierta) { try { fn(); } catch (e) { console.warn(e); } } else cola.push(fn); };
+  A.abrir = function () {
+    if (A.abierta) return;
+    A.abierta = true;
+    cola.splice(0).forEach(function (fn) { try { fn(); } catch (e) { console.warn(e); } });
+    avisar('ahio:abierta');
+  };
+  A.retirarCortina = function () {
+    if (A.cortinaFuera) return;
+    A.cortinaFuera = true;
+    clearTimeout(window.__redCortina);
+    h.classList.remove('cortina-activa');
+    h.classList.add('cortina-fuera');
+    A.abrir();
+    avisar('ahio:fuera');
+  };
+  d.addEventListener('ahio:cortina-abre', function () { A.abrir(); });
+  d.addEventListener('ahio:cortina-fuera', function () { A.retirarCortina(); });
+  // red de seguridad por si main.js o la cortina no llegan: la cortina se va sola
+  window.__redCortina = setTimeout(function () { A.retirarCortina(); }, 6500);
+})(document);
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Gilda+Display&family=Wix+Madefor+Text:wght@400..600&display=swap">
+<link rel="stylesheet" href="css/estilos.css?v=203bfc3c">
+<link rel="stylesheet" href="css/entrada.css?v=b8565344">
+<link rel="stylesheet" href="css/fachada.css?v=c3a3229f">
+<link rel="stylesheet" href="css/3d.css?v=1405bd5d">
+<link rel="icon" href="marca/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="marca/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="marca/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2B3035">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image" content="img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<noscript><style>.cortina,#cortina{display:none!important}</style></noscript>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "Ahío San Martín · Apartamentos rurales Casa de la Villa",
+  "description": "Ocho apartamentos rurales dobles en el antiguo ayuntamiento de San Martín de Oscos: dos en planta baja y seis dúplex, con recepción, dos salones comunes, jardín y aparcamiento gratuito.",
+  "image": "img/og.jpg",
+  "telephone": "+34 644 835 772",
+  "email": "hola@oscosahio.es",
+  "address": { "@type": "PostalAddress", "streetAddress": "La Villa s/n", "postalCode": "33777", "addressLocality": "San Martín de Oscos", "addressRegion": "Asturias", "addressCountry": "ES" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 43.2650908, "longitude": -6.9616133 },
+  "numberOfRooms": 8,
+  "checkinTime": "16:00",
+  "checkoutTime": "12:00",
+  "petsAllowed": true,
+  "smokingAllowed": false,
+  "amenityFeature": [
+    { "@type": "LocationFeatureSpecification", "name": "Aparcamiento gratuito", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Calefacción central", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Jardín y terraza", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Lavandería", "value": true }
+  ],
+  "sameAs": ["https://www.instagram.com/ahiosanmartin/", "https://www.facebook.com/ahiosanmartin"]
+}
+</script>
+</head>
+<body>
+<!-- ============ cortina «La linterna en la niebla» (agente Entrada: partes/cortina.html + css/entrada.css + js/linterna.js) ============
+     Niebla de madrugada; se dibuja a línea la casa del logo (muros → tejado → linterna), la linterna se enciende,
+     y la niebla se abre desde su luz y destapa la portada. El dibujo vuela al logo de la cabecera si lo encuentra
+     ([data-logo-cortina]); si no, se funde.
+     Este script va ANTES de la cortina: solo con JS se enseña (html.cortina-activa), así que sin JS no aparece nunca.
+     Expone Ahio.cortina = { alAbrirse(fn), alRetirarse(fn), abrir(), retirar(), abierta, fuera, enMarcha, marcas, apertura }
+     y lanza en document «ahio:cortina-abre» (EMPIEZA a abrirse) y «ahio:cortina-fuera» (ya no está).
+     Red de seguridad: si js/linterna.js no arranca en 2,6 s, fuera; y a los 8 s, fuera pase lo que pase.
+     ?sin-cortina la quita (para pruebas y para mirar la portada). -->
+<script>
+(function (d, w) {
+  var h = d.documentElement, A = w.Ahio = w.Ahio || {}, abierta = false, fuera = false, alAbrir = [], alFuera = [];
+  h.classList.add('js');
+  function avisar(lista, nombre) {
+    lista.splice(0).forEach(function (f) { try { f(); } catch (e) { console.warn(e); } });
+    try { d.dispatchEvent(new CustomEvent(nombre)); } catch (e) {}
+  }
+  function abrir() { if (abierta) return; abierta = true; h.classList.add('cortina-abriendo'); avisar(alAbrir, 'ahio:cortina-abre'); }
+  function retirar() {
+    if (fuera) return;
+    fuera = true;
+    clearTimeout(red1); clearTimeout(red2);
+    var c = d.getElementById('cortina');
+    if (c) c.hidden = true;
+    h.classList.remove('cortina-activa', 'cortina-abriendo', 'cortina-vuela');
+    h.classList.add('cortina-fuera');
+    abrir();
+    avisar(alFuera, 'ahio:cortina-fuera');
+  }
+  A.cortina = {
+    alAbrirse: function (f) { if (abierta) f(); else alAbrir.push(f); },
+    alRetirarse: function (f) { if (fuera) f(); else alFuera.push(f); },
+    abrir: abrir, retirar: retirar, enMarcha: false, marcas: { carga: 0 }, apertura: null,
+    get abierta() { return abierta; }, get fuera() { return fuera; }
+  };
+  var red1 = setTimeout(function () { if (!A.cortina.enMarcha) retirar(); }, 2600);
+  var red2 = setTimeout(retirar, 8000);
+  var quieto = false, sin = false;
+  try { quieto = w.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  try { sin = /[?&]sin-cortina\b/.test(w.location.search); } catch (e) {}
+  if (quieto || sin) retirar(); else h.classList.add('cortina-activa');
+})(document, window);
+</script>
+<div class="cortina" id="cortina" aria-hidden="true">
+  <canvas class="cortina__lienzo"></canvas>
+  <div class="cortina__luz"></div>
+  <div class="cortina__centro">
+    <svg class="cortina__casa" viewBox="190 30 270 240" focusable="false">
+      <path class="cortina__cristal" d="M293.48 98.58 L293.48 63.75 L324.98 48.49 L356.48 63.79 L356.48 99.19 L326.11 85.46 Z"/>
+      <path class="cortina__trazo" data-fase="muros" d="M356.48 99.19 L356.48 230.29 L208.86 230.29 L208.86 132.59" pathLength="1"/>
+      <path class="cortina__trazo" data-fase="muros" d="M266.00 250.53 L439.05 250.53 L439.05 136.52" pathLength="1"/>
+      <path class="cortina__trazo" data-fase="tejado" d="M208.86 132.59 L326.11 85.46 L439.05 136.52" pathLength="1"/>
+      <path class="cortina__trazo" data-fase="linterna" d="M293.48 133.00 L293.48 63.75 L324.98 48.49 L356.48 63.79 L356.48 99.19" pathLength="1"/>
+    </svg>
+    <p class="cortina__nombre">Ahío San Martín</p>
+    <p class="cortina__linea">Apartamentos rurales · San Martín de Oscos</p>
+  </div>
+</div>
+<noscript><style>#cortina{display:none!important}</style></noscript>
+<!-- la capa por la que puede cruzar el hilo de lana (módulo Hilo: js/hilo.js decide si la usa) -->
+<div id="hilo-capa" aria-hidden="true"></div>
+<a class="saltar" href="#principal">Saltar al contenido</a>
+
+<!-- ============ cabecera fija: el logo real (sin redibujar), las paradas y el teléfono.
+     El punto del enlace activo es la luz de la linterna. ============ -->
+<header class="cab" id="cab">
+  <div class="cab__in">
+    <a class="marca" href="./" aria-label="Ahío San Martín, a la portada">
+      <img class="marca__casa" src="marca/simbolo-96.png" srcset="marca/simbolo-96.png 1x, marca/simbolo-192.png 2x" width="48" height="42" alt="">
+      <img class="marca__nombre" src="marca/nombre-480.png" srcset="marca/nombre-480.png 1x, marca/nombre-960.png 2x" width="190" height="21" alt="Ahío San Martín">
+    </a>
+    <nav class="cab__nav" aria-label="Principal">
+      <a href="#vidas">El edificio</a>
+      <a href="#apartamentos">Apartamentos</a>
+      <a href="#ena">Ena</a>
+      <a href="#oscos">Los Oscos</a>
+      <a href="#reservar">Reservar</a>
+    </nav>
+    <a class="cab__tel" href="tel:+34644835772"><span class="vh">Teléfono: </span>644 835 772</a>
+    <a class="btn btn--linterna cab__res" href="#reservar">Ver fechas</a>
+    <button class="cab__menu" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu-movil"><span class="vh">Menú</span><i></i><i></i></button>
+  </div>
+  <div class="menu-movil" id="menu-movil" aria-hidden="true">
+    <nav aria-label="Menú">
+      <a href="#vidas"><small>Ayuntamiento, y también…</small>El edificio</a>
+      <a href="#apartamentos"><small>Ocho ventanas, ocho apartamentos</small>Apartamentos</a>
+      <a href="#dentro"><small>Salones, recepción y jardín</small>Dentro</a>
+      <a href="#ena"><small>La que lo lleva</small>Ena</a>
+      <a href="#lana"><small>La Xuntanza de Filandeiras</small>La lana</a>
+      <a href="#oscos"><small>El valle del Ahío en 3D</small>Los Oscos</a>
+      <a href="#reservar"><small>El registro de entrada</small>Reservar</a>
+      <a href="#llegar"><small>Y las preguntas</small>Cómo llegar</a>
+    </nav>
+    <p class="menu-movil__tel"><a href="tel:+34644835772">644 835 772</a> · <a href="https://wa.me/34644835772" rel="noopener" target="_blank">WhatsApp</a></p>
+  </div>
+</header>
+
+<main id="principal">
+
+  <!-- ============ 1. portada: la casa en la niebla (módulo Entrada: js/linterna.js + js/niebla.js) ============ -->
+  <section id="portada" class="portada" aria-labelledby="portada-tit">
+    <div class="portada__escena" data-modulo="linterna">
+      <!-- respaldo: la foto con dos capas de niebla en CSS -->
+      <picture data-foto="niebla-fachada"><source type="image/avif" srcset="img/fotos/niebla-fachada-480.avif 480w, img/fotos/niebla-fachada-800.avif 800w, img/fotos/niebla-fachada-1024.avif 1024w, img/fotos/niebla-fachada-1280.avif 1280w, img/fotos/niebla-fachada-1600.avif 1600w" sizes="100vw"><source type="image/webp" srcset="img/fotos/niebla-fachada-480.webp 480w, img/fotos/niebla-fachada-800.webp 800w, img/fotos/niebla-fachada-1024.webp 1024w, img/fotos/niebla-fachada-1280.webp 1280w, img/fotos/niebla-fachada-1600.webp 1600w" sizes="100vw"><img src="img/fotos/niebla-fachada-800.jpg" srcset="img/fotos/niebla-fachada-480.jpg 480w, img/fotos/niebla-fachada-800.jpg 800w, img/fotos/niebla-fachada-1024.jpg 1024w, img/fotos/niebla-fachada-1280.jpg 1280w, img/fotos/niebla-fachada-1600.jpg 1600w" sizes="100vw" width="1600" height="1200" class="portada__foto" alt="La casona de pizarra del antiguo ayuntamiento vista en diagonal desde lo alto, con la linterna acristalada en el tejado y la niebla de la mañana detrás" fetchpriority="high" loading="eager" decoding="async"></picture>
+      <div class="portada__niebla" aria-hidden="true"><i></i><i></i></div>
+    </div>
+    <div class="portada-texto">
+      <p class="portada__eti">Apartamentos rurales · San Martín de Oscos</p>
+      <h1 class="portada__tit" id="portada-tit"><span class="ln"><span>Ocho apartamentos</span></span> <span class="ln"><span>en el antiguo ayuntamiento</span></span> <span class="ln"><span>de San Martín de Oscos</span></span></h1>
+      <p class="portada__baj">Una casona de pizarra de principios del siglo XX, con una linterna acristalada en lo alto del tejado. Los lleva Ena.</p>
+      <div class="portada__acc">
+        <a class="btn btn--linterna" href="#reservar" data-reservar>Ver fechas</a>
+        <a class="btn btn--hueco" href="tel:+34644835772">Llamar <span class="placa-num">644 835 772</span></a>
+      </div>
+      <p class="portada__ahora" data-tiempo-ahora></p>
+    </div>
+  </section>
+
+  <!-- ============ 2. «Ahío, como el río» ============ -->
+  <section id="rio" class="sec rio" aria-labelledby="t-rio">
+    <div class="env rio__in">
+      <div class="rio__txt">
+        <p class="eyebrow">El nombre</p>
+        <h2 id="t-rio" class="rio__tit" data-partir>Ahío, <em>como el río</em></h2>
+        <p class="rio__entrada">El Ahío es el río principal de San Martín de Oscos: en busca del oro que se encontraba en él llegaron aquí los romanos, en el siglo&nbsp;I.</p>
+        <p class="rio__p">Ahío San Martín lleva su nombre. Son ocho apartamentos rurales en el edificio que fue el ayuntamiento del pueblo, una casona de pizarra y piedra con la cornisa blanca y una linterna de cristal en lo alto.</p>
+      </div>
+      <figure class="rio__f rio__f--casa">
+        <picture data-foto="fachada-hierba"><source type="image/avif" srcset="img/fotos/fachada-hierba-480.avif 480w, img/fotos/fachada-hierba-800.avif 800w, img/fotos/fachada-hierba-1024.avif 1024w, img/fotos/fachada-hierba-1280.avif 1280w" sizes="(max-width: 799px) 80vw, 34vw"><source type="image/webp" srcset="img/fotos/fachada-hierba-480.webp 480w, img/fotos/fachada-hierba-800.webp 800w, img/fotos/fachada-hierba-1024.webp 1024w, img/fotos/fachada-hierba-1280.webp 1280w" sizes="(max-width: 799px) 80vw, 34vw"><img src="img/fotos/fachada-hierba-800.jpg" srcset="img/fotos/fachada-hierba-480.jpg 480w, img/fotos/fachada-hierba-800.jpg 800w, img/fotos/fachada-hierba-1024.jpg 1024w, img/fotos/fachada-hierba-1280.jpg 1280w" sizes="(max-width: 799px) 80vw, 34vw" width="1280" height="1707" alt="La casona con su linterna detrás de la hierba alta, bajo un cielo azul con nubes" loading="lazy" decoding="async"></picture>
+      </figure>
+      <figure class="rio__f rio__f--agua">
+        <button type="button" class="foto-btn" data-visor="rio-ahio" aria-label="Ver más grande: el río Ahío en Mon"><picture data-foto="rio-ahio"><source type="image/avif" srcset="img/fotos/rio-ahio-480.avif 480w, img/fotos/rio-ahio-800.avif 800w, img/fotos/rio-ahio-1024.avif 1024w" sizes="(max-width: 799px) 70vw, 24vw"><source type="image/webp" srcset="img/fotos/rio-ahio-480.webp 480w, img/fotos/rio-ahio-800.webp 800w, img/fotos/rio-ahio-1024.webp 1024w" sizes="(max-width: 799px) 70vw, 24vw"><img src="img/fotos/rio-ahio-800.jpg" srcset="img/fotos/rio-ahio-480.jpg 480w, img/fotos/rio-ahio-800.jpg 800w, img/fotos/rio-ahio-1024.jpg 1024w" sizes="(max-width: 799px) 70vw, 24vw" width="1024" height="768" alt="El río Ahío bajando entre piedras y árboles en Mon, con una pasarela de madera" loading="lazy" decoding="async"></picture></button>
+        <figcaption>El Ahío en Mon, con su pasarela de madera.</figcaption>
+      </figure>
+    </div>
+    <div class="env">
+      <!-- las cifras verdaderas, en la letra de placa -->
+      <ul class="placa" aria-label="Ahío San Martín en cifras">
+        <li><b>8</b> apartamentos</li>
+        <li><b>2</b> en planta baja</li>
+        <li><b>6</b> dúplex</li>
+        <li>hasta <b>2</b> supletorias</li>
+        <li>mascotas bienvenidas</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ solo en la versión sobria: Ahío San Martín de un vistazo ============ -->
+  <section id="vistazo" class="sec vistazo" aria-labelledby="vistazo-tit">
+    <div class="env">
+      <h2 class="vistazo__tit" id="vistazo-tit">Ahío San Martín, de un vistazo</h2>
+      <table class="vistazo__tabla">
+        <tbody>
+          <tr><th scope="row">Apartamentos</th><td>8 dobles, totalmente equipados</td></tr>
+          <tr><th scope="row">Plantas</th><td>2 en la planta baja, sin escaleras · 6 dúplex en la primera planta (salón con cocina abajo; dormitorio con baño arriba)</td></tr>
+          <tr><th scope="row">Camas</th><td>Una cama de matrimonio por apartamento; dos de los dúplex, de 1,80</td></tr>
+          <tr><th scope="row">Supletorias</th><td>Hasta 2 por apartamento, en el salón · 15 € por persona y noche</td></tr>
+          <tr><th scope="row">Cunas</th><td>2 cunas de viaje · 10 €, una vez</td></tr>
+          <tr><th scope="row">Mascotas</th><td>Hasta 3 pequeñas o 2 grandes por apartamento · 12 € por noche, como mucho 72 €</td></tr>
+          <tr><th scope="row">Horarios</th><td>Entrada desde las 16:00 · salida hasta las 12:00 · check-in automático si lo prefieres</td></tr>
+          <tr><th scope="row">Servicios</th><td>Recepción, dos salones comunes, jardín y terraza, aparcamiento gratuito, calefacción central, lavandería · sin humo en todo el edificio</td></tr>
+          <tr><th scope="row">Distancias</th><td>Oviedo, unas 2 horas · Madrid, unas 5 horas · aeropuerto de Asturias, 130 km · estación de Oviedo, 170 km · playas, unos 50 km</td></tr>
+          <tr><th scope="row">Registro</th><td>AR.32.AS · Apartamento rural (Principado de Asturias)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 3. «Las vidas del edificio» (módulo Fachada: js/fachada.js) ============ -->
+  <section id="vidas" class="vidas" aria-labelledby="t-vidas">
+    <div class="env vidas__cab">
+      <p class="eyebrow">El edificio</p>
+      <h2 id="t-vidas" data-partir>Las vidas <em>del edificio</em></h2>
+    </div>
+    <div class="vidas__modulo" data-modulo="vidas">
+      <!-- respaldo: la fachada, sus usos y el texto -->
+      <div class="env vidas__respaldo">
+        <figure class="vidas__f">
+          <button type="button" class="foto-btn" data-visor="fachada-frente" aria-label="Ver más grande: la fachada principal"><picture data-foto="fachada-frente"><source type="image/avif" srcset="img/fotos/fachada-frente-480.avif 480w, img/fotos/fachada-frente-800.avif 800w, img/fotos/fachada-frente-1024.avif 1024w, img/fotos/fachada-frente-1280.avif 1280w, img/fotos/fachada-frente-1600.avif 1600w" sizes="(max-width: 899px) 92vw, 56vw"><source type="image/webp" srcset="img/fotos/fachada-frente-480.webp 480w, img/fotos/fachada-frente-800.webp 800w, img/fotos/fachada-frente-1024.webp 1024w, img/fotos/fachada-frente-1280.webp 1280w, img/fotos/fachada-frente-1600.webp 1600w" sizes="(max-width: 899px) 92vw, 56vw"><img src="img/fotos/fachada-frente-800.jpg" srcset="img/fotos/fachada-frente-480.jpg 480w, img/fotos/fachada-frente-800.jpg 800w, img/fotos/fachada-frente-1024.jpg 1024w, img/fotos/fachada-frente-1280.jpg 1280w, img/fotos/fachada-frente-1600.jpg 1600w" sizes="(max-width: 899px) 92vw, 56vw" width="1600" height="900" alt="La fachada principal de pizarra y piedra: cornisa blanca, frontón con la placa, balcón de hierro sobre la puerta de arco, ocho ventanas y la linterna asomando detrás" loading="lazy" decoding="async"></picture></button>
+        </figure>
+        <ol class="vidas__lista">
+          <li>
+            <p class="vidas__placa">Ayuntamiento</p>
+            <p>Lo construyeron a principios del siglo XX para ser el ayuntamiento de San Martín de Oscos.</p>
+          </li>
+          <li>
+            <p class="vidas__placa">Y también fue</p>
+            <p>Turismo Asturias cuenta que el edificio también albergó el <b>centro social</b>, la <b>biblioteca</b>, el <b>centro médico</b> y la <b>cárcel</b>.</p>
+          </li>
+          <li>
+            <p class="vidas__placa">Reformado</p>
+            <p>A principios de los noventa se reformó entero: piedra, madera y pizarra, con vigas de más de cien años.</p>
+          </li>
+          <li>
+            <p class="vidas__placa">Apartamentos rurales Casa de la Villa</p>
+            <p>Hoy son ocho apartamentos. Desde 2022 los lleva Ena.</p>
+          </li>
+        </ol>
+        <figure class="vidas__antigua">
+          <picture data-foto="antiguo"><source type="image/avif" srcset="img/fotos/antiguo-248.avif 248w" sizes="248px"><source type="image/webp" srcset="img/fotos/antiguo-248.webp 248w" sizes="248px"><img src="img/fotos/antiguo-248.jpg" srcset="img/fotos/antiguo-248.jpg 248w" sizes="248px" width="248" height="203" alt="Foto antigua en blanco y negro: una calle de tierra mojada con una mujer caminando y, al fondo, el edificio" loading="lazy" decoding="async"></picture>
+          <figcaption>«Antiguo ayuntamiento. Al fondo de la imagen, se ve el edificio donde hoy en día se encuentra Ahío San Martín.» <span>Pie de la foto en su web</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. «La fachada es el índice»: los apartamentos (módulo Fachada) ============ -->
+  <section id="apartamentos" class="apartamentos" aria-labelledby="t-apartamentos">
+    <div class="env apartamentos__cab">
+      <p class="eyebrow">Los apartamentos</p>
+      <h2 id="t-apartamentos" data-partir>Ocho apartamentos dobles, <em>una sola fachada</em></h2>
+      <p class="sec-cab__txt">Son muy parecidos: dos en la planta baja, sin escaleras, y seis dúplex en la primera planta, con el salón y la cocina abajo y el dormitorio con su baño arriba. Al reservar puedes contarle a Ena qué prefieres y te asigna el que mejor encaje.</p>
+    </div>
+    <div class="apartamentos__modulo" data-modulo="indice">
+      <!-- respaldo: los dos tipos con sus fotos, y lo común -->
+      <div class="env tipos">
+        <article class="tipo" aria-labelledby="tipo-baja">
+          <div class="tipo__fotos">
+            <button type="button" class="foto-btn tipo__grande" data-visor="ap-salon" aria-label="Ver más grande: el salón comedor"><picture data-foto="ap-salon"><source type="image/avif" srcset="img/fotos/ap-salon-480.avif 480w, img/fotos/ap-salon-800.avif 800w, img/fotos/ap-salon-1024.avif 1024w" sizes="(max-width: 799px) 92vw, 44vw"><source type="image/webp" srcset="img/fotos/ap-salon-480.webp 480w, img/fotos/ap-salon-800.webp 800w, img/fotos/ap-salon-1024.webp 1024w" sizes="(max-width: 799px) 92vw, 44vw"><img src="img/fotos/ap-salon-800.jpg" srcset="img/fotos/ap-salon-480.jpg 480w, img/fotos/ap-salon-800.jpg 800w, img/fotos/ap-salon-1024.jpg 1024w" sizes="(max-width: 799px) 92vw, 44vw" width="1024" height="768" alt="Salón comedor con sofá blanco, mesa de madera y una ventana con contraventanas abiertas" loading="lazy" decoding="async"></picture></button>
+            <button type="button" class="foto-btn" data-visor="ap-completo" aria-label="Ver más grande: el apartamento entero"><picture data-foto="ap-completo"><source type="image/avif" srcset="img/fotos/ap-completo-480.avif 480w, img/fotos/ap-completo-800.avif 800w, img/fotos/ap-completo-1024.avif 1024w" sizes="(max-width: 799px) 30vw, 14vw"><source type="image/webp" srcset="img/fotos/ap-completo-480.webp 480w, img/fotos/ap-completo-800.webp 800w, img/fotos/ap-completo-1024.webp 1024w" sizes="(max-width: 799px) 30vw, 14vw"><img src="img/fotos/ap-completo-800.jpg" srcset="img/fotos/ap-completo-480.jpg 480w, img/fotos/ap-completo-800.jpg 800w, img/fotos/ap-completo-1024.jpg 1024w" sizes="(max-width: 799px) 30vw, 14vw" width="1024" height="768" alt="El apartamento de un vistazo: cocina, salón y, al fondo, el dormitorio" loading="lazy" decoding="async"></picture></button>
+            <button type="button" class="foto-btn" data-visor="ap-dormitorio" aria-label="Ver más grande: el dormitorio"><picture data-foto="ap-dormitorio"><source type="image/avif" srcset="img/fotos/ap-dormitorio-480.avif 480w, img/fotos/ap-dormitorio-800.avif 800w, img/fotos/ap-dormitorio-1024.avif 1024w" sizes="(max-width: 799px) 30vw, 14vw"><source type="image/webp" srcset="img/fotos/ap-dormitorio-480.webp 480w, img/fotos/ap-dormitorio-800.webp 800w, img/fotos/ap-dormitorio-1024.webp 1024w" sizes="(max-width: 799px) 30vw, 14vw"><img src="img/fotos/ap-dormitorio-800.jpg" srcset="img/fotos/ap-dormitorio-480.jpg 480w, img/fotos/ap-dormitorio-800.jpg 800w, img/fotos/ap-dormitorio-1024.jpg 1024w" sizes="(max-width: 799px) 30vw, 14vw" width="1024" height="768" alt="Dormitorio con cama de matrimonio y mesillas" loading="lazy" decoding="async"></picture></button>
+            <button type="button" class="foto-btn" data-visor="ap-ventana" aria-label="Ver más grande: la ventana del dormitorio"><picture data-foto="ap-ventana"><source type="image/avif" srcset="img/fotos/ap-ventana-480.avif 480w, img/fotos/ap-ventana-800.avif 800w, img/fotos/ap-ventana-1024.avif 1024w" sizes="(max-width: 799px) 30vw, 14vw"><source type="image/webp" srcset="img/fotos/ap-ventana-480.webp 480w, img/fotos/ap-ventana-800.webp 800w, img/fotos/ap-ventana-1024.webp 1024w" sizes="(max-width: 799px) 30vw, 14vw"><img src="img/fotos/ap-ventana-800.jpg" srcset="img/fotos/ap-ventana-480.jpg 480w, img/fotos/ap-ventana-800.jpg 800w, img/fotos/ap-ventana-1024.jpg 1024w" sizes="(max-width: 799px) 30vw, 14vw" width="1024" height="1365" alt="La ventana del dormitorio abierta al jardín" loading="lazy" decoding="async"></picture></button>
+          </div>
+          <div class="tipo__txt">
+            <p class="tipo__n"><span class="placa-num">2</span> apartamentos</p>
+            <h3 id="tipo-baja">En la planta baja</h3>
+            <p>Sin escaleras: el salón comedor con su cocina y el dormitorio con cama de matrimonio, todo en el mismo piso.</p>
+            <p class="tipo__nota">Fotos del apartamento 1.</p>
+            <a class="btn btn--verde" href="#reservar" data-reservar="planta-baja">Ver fechas en planta baja</a>
+          </div>
+        </article>
+        <article class="tipo" aria-labelledby="tipo-duplex">
+          <div class="tipo__fotos">
+            <button type="button" class="foto-btn tipo__grande" data-visor="duplex-dormitorio" aria-label="Ver más grande: un dormitorio abuhardillado"><picture data-foto="duplex-dormitorio"><source type="image/avif" srcset="img/fotos/duplex-dormitorio-480.avif 480w, img/fotos/duplex-dormitorio-800.avif 800w, img/fotos/duplex-dormitorio-1024.avif 1024w, img/fotos/duplex-dormitorio-1280.avif 1280w" sizes="(max-width: 799px) 92vw, 44vw"><source type="image/webp" srcset="img/fotos/duplex-dormitorio-480.webp 480w, img/fotos/duplex-dormitorio-800.webp 800w, img/fotos/duplex-dormitorio-1024.webp 1024w, img/fotos/duplex-dormitorio-1280.webp 1280w" sizes="(max-width: 799px) 92vw, 44vw"><img src="img/fotos/duplex-dormitorio-800.jpg" srcset="img/fotos/duplex-dormitorio-480.jpg 480w, img/fotos/duplex-dormitorio-800.jpg 800w, img/fotos/duplex-dormitorio-1024.jpg 1024w, img/fotos/duplex-dormitorio-1280.jpg 1280w" sizes="(max-width: 799px) 92vw, 44vw" width="1280" height="1707" alt="Dormitorio abuhardillado con la luz de la ventana sobre la cama" loading="lazy" decoding="async"></picture></button>
+            <button type="button" class="foto-btn" data-visor="duplex-cama" aria-label="Ver más grande: el dormitorio con el baño"><picture data-foto="duplex-cama"><source type="image/avif" srcset="img/fotos/duplex-cama-480.avif 480w, img/fotos/duplex-cama-800.avif 800w, img/fotos/duplex-cama-960.avif 960w" sizes="(max-width: 799px) 30vw, 14vw"><source type="image/webp" srcset="img/fotos/duplex-cama-480.webp 480w, img/fotos/duplex-cama-800.webp 800w, img/fotos/duplex-cama-960.webp 960w" sizes="(max-width: 799px) 30vw, 14vw"><img src="img/fotos/duplex-cama-800.jpg" srcset="img/fotos/duplex-cama-480.jpg 480w, img/fotos/duplex-cama-800.jpg 800w, img/fotos/duplex-cama-960.jpg 960w" sizes="(max-width: 799px) 30vw, 14vw" width="960" height="1280" alt="El dormitorio con el baño en suite al fondo" loading="lazy" decoding="async"></picture></button>
+            <button type="button" class="foto-btn" data-visor="duplex-velux" aria-label="Ver más grande: la ventana del tejado"><picture data-foto="duplex-velux"><source type="image/avif" srcset="img/fotos/duplex-velux-480.avif 480w, img/fotos/duplex-velux-800.avif 800w, img/fotos/duplex-velux-1024.avif 1024w" sizes="(max-width: 799px) 30vw, 14vw"><source type="image/webp" srcset="img/fotos/duplex-velux-480.webp 480w, img/fotos/duplex-velux-800.webp 800w, img/fotos/duplex-velux-1024.webp 1024w" sizes="(max-width: 799px) 30vw, 14vw"><img src="img/fotos/duplex-velux-800.jpg" srcset="img/fotos/duplex-velux-480.jpg 480w, img/fotos/duplex-velux-800.jpg 800w, img/fotos/duplex-velux-1024.jpg 1024w" sizes="(max-width: 799px) 30vw, 14vw" width="1024" height="768" alt="Dormitorio con una ventana de tejado" loading="lazy" decoding="async"></picture></button>
+            <button type="button" class="foto-btn" data-visor="duplex-bajo-cubierta" aria-label="Ver más grande: bajo las vigas"><picture data-foto="duplex-bajo-cubierta"><source type="image/avif" srcset="img/fotos/duplex-bajo-cubierta-480.avif 480w, img/fotos/duplex-bajo-cubierta-768.avif 768w" sizes="(max-width: 799px) 30vw, 14vw"><source type="image/webp" srcset="img/fotos/duplex-bajo-cubierta-480.webp 480w, img/fotos/duplex-bajo-cubierta-768.webp 768w" sizes="(max-width: 799px) 30vw, 14vw"><img src="img/fotos/duplex-bajo-cubierta-768.jpg" srcset="img/fotos/duplex-bajo-cubierta-480.jpg 480w, img/fotos/duplex-bajo-cubierta-768.jpg 768w" sizes="(max-width: 799px) 30vw, 14vw" width="768" height="1024" alt="Dormitorio bajo las vigas de madera" loading="lazy" decoding="async"></picture></button>
+            <button type="button" class="foto-btn" data-visor="bano" aria-label="Ver más grande: el baño"><picture data-foto="bano"><source type="image/avif" srcset="img/fotos/bano-480.avif 480w, img/fotos/bano-768.avif 768w" sizes="(max-width: 799px) 30vw, 14vw"><source type="image/webp" srcset="img/fotos/bano-480.webp 480w, img/fotos/bano-768.webp 768w" sizes="(max-width: 799px) 30vw, 14vw"><img src="img/fotos/bano-768.jpg" srcset="img/fotos/bano-480.jpg 480w, img/fotos/bano-768.jpg 768w" sizes="(max-width: 799px) 30vw, 14vw" width="768" height="1024" alt="Baño con bañera y lavabo" loading="lazy" decoding="async"></picture></button>
+          </div>
+          <div class="tipo__txt">
+            <p class="tipo__n"><span class="placa-num">6</span> dúplex</p>
+            <h3 id="tipo-duplex">En la primera planta</h3>
+            <p>Abajo, el salón con la cocina; arriba, el dormitorio con el baño en suite. Dos de ellos tienen cama de 1,80.</p>
+            <p class="tipo__nota">Fotos del apartamento 7.</p>
+            <a class="btn btn--verde" href="#reservar" data-reservar="duplex">Ver fechas en dúplex</a>
+          </div>
+        </article>
+        <div class="tipos__comun">
+          <div>
+            <h3>En todos</h3>
+            <p>Televisión, baño completo con bañera, ropa de cama, nevera, horno, vitrocerámica, microondas, cafetera italiana, tostadora, sartenes, potas, cuchillos, tabla y mantel.</p>
+          </div>
+          <div class="tipos__extra">
+            <figure><button type="button" class="foto-btn" data-visor="supletorias" aria-label="Ver más grande: las supletorias"><picture data-foto="supletorias"><source type="image/avif" srcset="img/fotos/supletorias-500.avif 500w" sizes="160px"><source type="image/webp" srcset="img/fotos/supletorias-500.webp 500w" sizes="160px"><img src="img/fotos/supletorias-500.jpg" srcset="img/fotos/supletorias-500.jpg 500w" sizes="160px" width="500" height="512" alt="Un salón con las dos camas supletorias preparadas" loading="lazy" decoding="async"></picture></button></figure>
+            <p><b>Supletorias:</b> hasta 2 por apartamento, en el salón, a 15 € por persona y noche. <b>Cunas de viaje:</b> hay 2, a 10 € una vez.</p>
+          </div>
+          <p class="tipos__mas">Y para todos: <a class="enlace" href="#dentro">la recepción</a>, <a class="enlace" href="#dentro">el salón de arriba</a> y <a class="enlace" href="#dentro">el jardín</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. Dentro: las zonas comunes ============ -->
+  <section id="dentro" class="sec dentro oscuro" aria-labelledby="t-dentro">
+    <div class="env">
+      <header class="sec-cab">
+        <p class="eyebrow">Dentro</p>
+        <h2 id="t-dentro" data-partir>Piedra, madera <em>y pizarra</em></h2>
+        <p class="sec-cab__txt">Además de tu apartamento, la casa es de todos: la recepción, dos salones comunes y el jardín. La decoración mira a Los Oscos: galochas, cardos, piñas y hortensias.</p>
+      </header>
+      <div class="dentro__rejilla">
+        <figure class="dentro__f dentro__f--alto">
+          <button type="button" class="foto-btn" data-visor="salon-alto" aria-label="Ver más grande: el salón de arriba"><picture data-foto="salon-alto"><source type="image/avif" srcset="img/fotos/salon-alto-480.avif 480w, img/fotos/salon-alto-800.avif 800w, img/fotos/salon-alto-1024.avif 1024w, img/fotos/salon-alto-1280.avif 1280w" sizes="(max-width: 699px) 92vw, 38vw"><source type="image/webp" srcset="img/fotos/salon-alto-480.webp 480w, img/fotos/salon-alto-800.webp 800w, img/fotos/salon-alto-1024.webp 1024w, img/fotos/salon-alto-1280.webp 1280w" sizes="(max-width: 699px) 92vw, 38vw"><img src="img/fotos/salon-alto-800.jpg" srcset="img/fotos/salon-alto-480.jpg 480w, img/fotos/salon-alto-800.jpg 800w, img/fotos/salon-alto-1024.jpg 1024w, img/fotos/salon-alto-1280.jpg 1280w" sizes="(max-width: 699px) 92vw, 38vw" width="1280" height="1707" alt="El salón común bajo la cubierta: cerchas de madera, muros de pizarra, barandilla y suelo de vidrio y una butaca roja" loading="lazy" decoding="async"></picture></button>
+          <figcaption><b>El salón de arriba</b>Bajo la cubierta, con las cerchas a la vista y el suelo de vidrio. Hay juegos para los niños.</figcaption>
+        </figure>
+        <figure class="dentro__f dentro__f--butacas">
+          <button type="button" class="foto-btn" data-visor="butacas" aria-label="Ver más grande: las butacas"><picture data-foto="butacas"><source type="image/avif" srcset="img/fotos/butacas-480.avif 480w, img/fotos/butacas-768.avif 768w" sizes="(max-width: 699px) 44vw, 22vw"><source type="image/webp" srcset="img/fotos/butacas-480.webp 480w, img/fotos/butacas-768.webp 768w" sizes="(max-width: 699px) 44vw, 22vw"><img src="img/fotos/butacas-768.jpg" srcset="img/fotos/butacas-480.jpg 480w, img/fotos/butacas-768.jpg 768w" sizes="(max-width: 699px) 44vw, 22vw" width="768" height="1024" alt="Dos butacas de madera al sol contra el muro de pizarra" loading="lazy" decoding="async"></picture></button>
+          <figcaption>Butacas al sol contra la pizarra.</figcaption>
+        </figure>
+        <figure class="dentro__f dentro__f--recepcion">
+          <button type="button" class="foto-btn" data-visor="recepcion" aria-label="Ver más grande: la recepción"><picture data-foto="recepcion"><source type="image/avif" srcset="img/fotos/recepcion-480.avif 480w, img/fotos/recepcion-800.avif 800w, img/fotos/recepcion-1024.avif 1024w, img/fotos/recepcion-1280.avif 1280w" sizes="(max-width: 699px) 44vw, 22vw"><source type="image/webp" srcset="img/fotos/recepcion-480.webp 480w, img/fotos/recepcion-800.webp 800w, img/fotos/recepcion-1024.webp 1024w, img/fotos/recepcion-1280.webp 1280w" sizes="(max-width: 699px) 44vw, 22vw"><img src="img/fotos/recepcion-800.jpg" srcset="img/fotos/recepcion-480.jpg 480w, img/fotos/recepcion-800.jpg 800w, img/fotos/recepcion-1024.jpg 1024w, img/fotos/recepcion-1280.jpg 1280w" sizes="(max-width: 699px) 44vw, 22vw" width="1280" height="1707" alt="La recepción: un mueble antiguo con vitrina, un libro abierto, flores secas y el cuadro del logo" loading="lazy" decoding="async"></picture></button>
+          <figcaption><b>La recepción</b>Para la bienvenida y lo que necesites.</figcaption>
+        </figure>
+        <figure class="dentro__f dentro__f--piedra">
+          <button type="button" class="foto-btn" data-visor="salon-piedra" aria-label="Ver más grande: el otro salón"><picture data-foto="salon-piedra"><source type="image/avif" srcset="img/fotos/salon-piedra-480.avif 480w, img/fotos/salon-piedra-800.avif 800w, img/fotos/salon-piedra-1024.avif 1024w" sizes="(max-width: 699px) 92vw, 40vw"><source type="image/webp" srcset="img/fotos/salon-piedra-480.webp 480w, img/fotos/salon-piedra-800.webp 800w, img/fotos/salon-piedra-1024.webp 1024w" sizes="(max-width: 699px) 92vw, 40vw"><img src="img/fotos/salon-piedra-800.jpg" srcset="img/fotos/salon-piedra-480.jpg 480w, img/fotos/salon-piedra-800.jpg 800w, img/fotos/salon-piedra-1024.jpg 1024w" sizes="(max-width: 699px) 92vw, 40vw" width="1024" height="768" alt="Salón común con sofás rojos y un muro de piedra" loading="lazy" decoding="async"></picture></button>
+          <figcaption><b>El otro salón</b>Sofás rojos y el muro de piedra.</figcaption>
+        </figure>
+        <figure class="dentro__f dentro__f--escalera">
+          <button type="button" class="foto-btn" data-visor="escalera" aria-label="Ver más grande: la escalera"><picture data-foto="escalera"><source type="image/avif" srcset="img/fotos/escalera-480.avif 480w, img/fotos/escalera-800.avif 800w, img/fotos/escalera-1024.avif 1024w, img/fotos/escalera-1280.avif 1280w" sizes="(max-width: 699px) 44vw, 18vw"><source type="image/webp" srcset="img/fotos/escalera-480.webp 480w, img/fotos/escalera-800.webp 800w, img/fotos/escalera-1024.webp 1024w, img/fotos/escalera-1280.webp 1280w" sizes="(max-width: 699px) 44vw, 18vw"><img src="img/fotos/escalera-800.jpg" srcset="img/fotos/escalera-480.jpg 480w, img/fotos/escalera-800.jpg 800w, img/fotos/escalera-1024.jpg 1024w, img/fotos/escalera-1280.jpg 1280w" sizes="(max-width: 699px) 44vw, 18vw" width="1280" height="1707" alt="La escalera de madera junto a una pared de pavés" loading="lazy" decoding="async"></picture></button>
+          <figcaption>La escalera de madera.</figcaption>
+        </figure>
+        <figure class="dentro__f dentro__f--jardin">
+          <button type="button" class="foto-btn" data-visor="jardin" aria-label="Ver más grande: el jardín"><picture data-foto="jardin"><source type="image/avif" srcset="img/fotos/jardin-480.avif 480w, img/fotos/jardin-800.avif 800w, img/fotos/jardin-1024.avif 1024w, img/fotos/jardin-1280.avif 1280w, img/fotos/jardin-1600.avif 1600w" sizes="(max-width: 699px) 92vw, 46vw"><source type="image/webp" srcset="img/fotos/jardin-480.webp 480w, img/fotos/jardin-800.webp 800w, img/fotos/jardin-1024.webp 1024w, img/fotos/jardin-1280.webp 1280w, img/fotos/jardin-1600.webp 1600w" sizes="(max-width: 699px) 92vw, 46vw"><img src="img/fotos/jardin-800.jpg" srcset="img/fotos/jardin-480.jpg 480w, img/fotos/jardin-800.jpg 800w, img/fotos/jardin-1024.jpg 1024w, img/fotos/jardin-1280.jpg 1280w, img/fotos/jardin-1600.jpg 1600w" sizes="(max-width: 699px) 92vw, 46vw" width="1600" height="900" alt="El jardín con caminos de losa entre abetos, una farola al fondo y el pueblo detrás" loading="lazy" decoding="async"></picture></button>
+          <figcaption><b>El jardín y la terraza</b>Caminos de losa, árboles y mesas fuera.</figcaption>
+        </figure>
+        <figure class="dentro__f dentro__f--plaza">
+          <button type="button" class="foto-btn" data-visor="plaza" aria-label="Ver más grande: la plaza"><picture data-foto="plaza"><source type="image/avif" srcset="img/fotos/plaza-480.avif 480w, img/fotos/plaza-800.avif 800w, img/fotos/plaza-1024.avif 1024w" sizes="(max-width: 699px) 92vw, 30vw"><source type="image/webp" srcset="img/fotos/plaza-480.webp 480w, img/fotos/plaza-800.webp 800w, img/fotos/plaza-1024.webp 1024w" sizes="(max-width: 699px) 92vw, 30vw"><img src="img/fotos/plaza-800.jpg" srcset="img/fotos/plaza-480.jpg 480w, img/fotos/plaza-800.jpg 800w, img/fotos/plaza-1024.jpg 1024w" sizes="(max-width: 699px) 92vw, 30vw" width="1024" height="768" alt="La plaza empedrada con un dibujo circular y una farola en el centro, delante de la fachada entre cipreses" loading="lazy" decoding="async"></picture></button>
+          <figcaption>Delante, la plaza empedrada.</figcaption>
+        </figure>
+        <figure class="dentro__f dentro__f--ventana">
+          <button type="button" class="foto-btn" data-visor="ventana-pueblo" aria-label="Ver más grande: el pueblo desde una ventana"><picture data-foto="ventana-pueblo"><source type="image/avif" srcset="img/fotos/ventana-pueblo-480.avif 480w, img/fotos/ventana-pueblo-800.avif 800w, img/fotos/ventana-pueblo-1024.avif 1024w, img/fotos/ventana-pueblo-1280.avif 1280w, img/fotos/ventana-pueblo-1600.avif 1600w" sizes="(max-width: 699px) 92vw, 36vw"><source type="image/webp" srcset="img/fotos/ventana-pueblo-480.webp 480w, img/fotos/ventana-pueblo-800.webp 800w, img/fotos/ventana-pueblo-1024.webp 1024w, img/fotos/ventana-pueblo-1280.webp 1280w, img/fotos/ventana-pueblo-1600.webp 1600w" sizes="(max-width: 699px) 92vw, 36vw"><img src="img/fotos/ventana-pueblo-800.jpg" srcset="img/fotos/ventana-pueblo-480.jpg 480w, img/fotos/ventana-pueblo-800.jpg 800w, img/fotos/ventana-pueblo-1024.jpg 1024w, img/fotos/ventana-pueblo-1280.jpg 1280w, img/fotos/ventana-pueblo-1600.jpg 1600w" sizes="(max-width: 699px) 92vw, 36vw" width="1600" height="900" alt="El pueblo visto desde dentro, enmarcado por una ventana: la plaza, la farola y las casas en la ladera" loading="lazy" decoding="async"></picture></button>
+          <figcaption>San Martín, desde una ventana de la casa.</figcaption>
+        </figure>
+      </div>
+      <div class="decor">
+        <p class="decor__tit">Galochas, cardos, piñas, hortensias</p>
+        <ul class="decor__fotos">
+          <li><button type="button" class="foto-btn" data-visor="cuadros" aria-label="Ver más grande: las láminas de flores"><picture data-foto="cuadros"><source type="image/avif" srcset="img/fotos/cuadros-480.avif 480w, img/fotos/cuadros-800.avif 800w, img/fotos/cuadros-1024.avif 1024w" sizes="(max-width: 699px) 30vw, 14vw"><source type="image/webp" srcset="img/fotos/cuadros-480.webp 480w, img/fotos/cuadros-800.webp 800w, img/fotos/cuadros-1024.webp 1024w" sizes="(max-width: 699px) 30vw, 14vw"><img src="img/fotos/cuadros-800.jpg" srcset="img/fotos/cuadros-480.jpg 480w, img/fotos/cuadros-800.jpg 800w, img/fotos/cuadros-1024.jpg 1024w" sizes="(max-width: 699px) 30vw, 14vw" width="1024" height="1365" alt="Láminas botánicas de hortensias y flores enmarcadas" loading="lazy" decoding="async"></picture></button></li>
+          <li><button type="button" class="foto-btn" data-visor="lamina-cesto" aria-label="Ver más grande: una lámina"><picture data-foto="lamina-cesto"><source type="image/avif" srcset="img/fotos/lamina-cesto-480.avif 480w, img/fotos/lamina-cesto-800.avif 800w, img/fotos/lamina-cesto-1024.avif 1024w" sizes="(max-width: 699px) 30vw, 14vw"><source type="image/webp" srcset="img/fotos/lamina-cesto-480.webp 480w, img/fotos/lamina-cesto-800.webp 800w, img/fotos/lamina-cesto-1024.webp 1024w" sizes="(max-width: 699px) 30vw, 14vw"><img src="img/fotos/lamina-cesto-800.jpg" srcset="img/fotos/lamina-cesto-480.jpg 480w, img/fotos/lamina-cesto-800.jpg 800w, img/fotos/lamina-cesto-1024.jpg 1024w" sizes="(max-width: 699px) 30vw, 14vw" width="1024" height="1365" alt="Una lámina enmarcada con un cesto y flores" loading="lazy" decoding="async"></picture></button></li>
+          <li><button type="button" class="foto-btn" data-visor="ap-mesa" aria-label="Ver más grande: hortensias en la mesa"><picture data-foto="ap-mesa"><source type="image/avif" srcset="img/fotos/ap-mesa-480.avif 480w, img/fotos/ap-mesa-800.avif 800w, img/fotos/ap-mesa-1024.avif 1024w" sizes="(max-width: 699px) 30vw, 14vw"><source type="image/webp" srcset="img/fotos/ap-mesa-480.webp 480w, img/fotos/ap-mesa-800.webp 800w, img/fotos/ap-mesa-1024.webp 1024w" sizes="(max-width: 699px) 30vw, 14vw"><img src="img/fotos/ap-mesa-800.jpg" srcset="img/fotos/ap-mesa-480.jpg 480w, img/fotos/ap-mesa-800.jpg 800w, img/fotos/ap-mesa-1024.jpg 1024w" sizes="(max-width: 699px) 30vw, 14vw" width="1024" height="1365" alt="Hortensias secas en un jarrón sobre una mesa de madera" loading="lazy" decoding="async"></picture></button></li>
+        </ul>
+      </div>
+
+      <div class="practico">
+        <section class="practico__lista" aria-labelledby="t-practico">
+          <h3 id="t-practico">Lo práctico</h3>
+          <dl>
+            <div><dt>Entrada</dt><dd>Desde las 16:00; antes, si el apartamento ya está listo.</dd></div>
+            <div><dt>Salida</dt><dd>Hasta las 12:00. Si necesitas flexibilidad, se consulta.</dd></div>
+            <div><dt>Check-in automático</dt><dd>Si lo prefieres, recoges tú las llaves y el parte de viajeros te llega por correo.</dd></div>
+            <div><dt>Calefacción</dt><dd>Central, en todo el edificio. No hay chimenea.</dd></div>
+            <div><dt>Sin humo</dt><dd>No se fuma en ningún sitio del edificio; en la terraza hay ceniceros.</dd></div>
+            <div><dt>Aparcamiento</dt><dd>Gratis, al aire libre.</dd></div>
+            <div><dt>Lavandería</dt><dd>Lavadora 1 h, 4,90 € · secadora 1 h, 4,60 € · cambio de sábanas, 7,50 € · limpieza de habitación, 11,50 € · de apartamento, 18,00 €.</dd></div>
+            <div class="practico__regalo"><dt>6 noches o más</dt><dd>Una lavadora, una secadora y una limpieza de regalo.</dd></div>
+          </dl>
+        </section>
+        <section class="mascotas" aria-labelledby="t-mascotas">
+          <div class="mascotas__fotos">
+            <button type="button" class="foto-btn" data-visor="perro-fachada" aria-label="Ver más grande: un border collie delante de la casa"><picture data-foto="perro-fachada"><source type="image/avif" srcset="img/fotos/perro-fachada-480.avif 480w, img/fotos/perro-fachada-800.avif 800w, img/fotos/perro-fachada-1024.avif 1024w" sizes="(max-width: 699px) 44vw, 16vw"><source type="image/webp" srcset="img/fotos/perro-fachada-480.webp 480w, img/fotos/perro-fachada-800.webp 800w, img/fotos/perro-fachada-1024.webp 1024w" sizes="(max-width: 699px) 44vw, 16vw"><img src="img/fotos/perro-fachada-800.jpg" srcset="img/fotos/perro-fachada-480.jpg 480w, img/fotos/perro-fachada-800.jpg 800w, img/fotos/perro-fachada-1024.jpg 1024w" sizes="(max-width: 699px) 44vw, 16vw" width="1024" height="1278" alt="Un border collie sentado delante de la fachada" loading="lazy" decoding="async"></picture></button>
+            <button type="button" class="foto-btn" data-visor="mascotas" aria-label="Ver más grande: el set de mascota"><picture data-foto="mascotas"><source type="image/avif" srcset="img/fotos/mascotas-480.avif 480w, img/fotos/mascotas-707.avif 707w" sizes="(max-width: 699px) 44vw, 16vw"><source type="image/webp" srcset="img/fotos/mascotas-480.webp 480w, img/fotos/mascotas-707.webp 707w" sizes="(max-width: 699px) 44vw, 16vw"><img src="img/fotos/mascotas-707.jpg" srcset="img/fotos/mascotas-480.jpg 480w, img/fotos/mascotas-707.jpg 707w" sizes="(max-width: 699px) 44vw, 16vw" width="707" height="672" alt="El set de mascota: una cama, una manta, un bebedero y galletas" loading="lazy" decoding="async"></picture></button>
+          </div>
+          <h3 id="t-mascotas">Mascotas, bienvenidas</h3>
+          <p>Hasta 3 pequeñas o 2 grandes por apartamento. 12 € por noche y apartamento, como mucho 72 €. Les espera su set: cama, manta, bebedero y galletas.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. Ena ============ -->
+  <section id="ena" class="sec ena" aria-labelledby="t-ena">
+    <div class="env ena__in">
+      <div class="ena__fotos">
+        <figure class="ena__f ena__f--puerta">
+          <button type="button" class="foto-btn" data-visor="ena-abre" aria-label="Ver más grande: Ena abriendo la puerta"><picture data-foto="ena-abre"><source type="image/avif" srcset="img/fotos/ena-abre-480.avif 480w, img/fotos/ena-abre-800.avif 800w, img/fotos/ena-abre-1024.avif 1024w, img/fotos/ena-abre-1200.avif 1200w" sizes="(max-width: 799px) 70vw, 30vw"><source type="image/webp" srcset="img/fotos/ena-abre-480.webp 480w, img/fotos/ena-abre-800.webp 800w, img/fotos/ena-abre-1024.webp 1024w, img/fotos/ena-abre-1200.webp 1200w" sizes="(max-width: 799px) 70vw, 30vw"><img src="img/fotos/ena-abre-800.jpg" srcset="img/fotos/ena-abre-480.jpg 480w, img/fotos/ena-abre-800.jpg 800w, img/fotos/ena-abre-1024.jpg 1024w, img/fotos/ena-abre-1200.jpg 1200w" sizes="(max-width: 799px) 70vw, 30vw" width="1200" height="1600" alt="Ena Mateos abriendo la puerta de madera de la casa" loading="lazy" decoding="async"></picture></button>
+        </figure>
+        <figure class="ena__f ena__f--ruta">
+          <button type="button" class="foto-btn" data-visor="ena-ruta" aria-label="Ver más grande: Ena en la ruta de Piorno"><picture data-foto="ena-ruta"><source type="image/avif" srcset="img/fotos/ena-ruta-480.avif 480w, img/fotos/ena-ruta-800.avif 800w, img/fotos/ena-ruta-1024.avif 1024w, img/fotos/ena-ruta-1200.avif 1200w" sizes="(max-width: 799px) 44vw, 16vw"><source type="image/webp" srcset="img/fotos/ena-ruta-480.webp 480w, img/fotos/ena-ruta-800.webp 800w, img/fotos/ena-ruta-1024.webp 1024w, img/fotos/ena-ruta-1200.webp 1200w" sizes="(max-width: 799px) 44vw, 16vw"><img src="img/fotos/ena-ruta-800.jpg" srcset="img/fotos/ena-ruta-480.jpg 480w, img/fotos/ena-ruta-800.jpg 800w, img/fotos/ena-ruta-1024.jpg 1024w, img/fotos/ena-ruta-1200.jpg 1200w" sizes="(max-width: 799px) 44vw, 16vw" width="1200" height="1600" alt="Ena caminando por la ruta de Piorno" loading="lazy" decoding="async"></picture></button>
+          <figcaption>En la ruta de Piorno.</figcaption>
+        </figure>
+      </div>
+      <div class="ena__txt">
+        <p class="eyebrow">Quién lo lleva</p>
+        <h2 id="t-ena" class="ena__tit">Ena</h2>
+        <p class="ena__quien">Ena Mateos, de Santa Eulalia de Oscos, el concejo de al lado.</p>
+        <blockquote class="ena__cita"><p>«Supe que lo mío era la hostelería cuando tenía 6 años, después de pasarme una semana enfadada con mi padre por no tener un bar donde pudiera trabajar con él.»</p></blockquote>
+        <p>Estudió gestión y dirección de empresas hoteleras y pasó ocho años trabajando por el mundo. <q>¡De China me traje miles de ideas!</q></p>
+        <blockquote class="ena__cita ena__cita--grande"><p>«Siempre digo que por cada puerta que se cierra, se abren muchas ventanas, y la mía se cerró en 2018.»</p></blockquote>
+        <p>En 2020 volver a San Martín cobró más fuerza que nunca. <q>Mi sueño se cumplió en 2022</q>, y desde entonces se dedica a recuperar <q>tradiciones, historias, conocimientos y recetas de Los Oscos</q>.</p>
+        <div class="ena__tiempo">
+          <p class="ena__tiempo-tit">Lo que ofrece, además de la cama</p>
+          <blockquote><p>«Te ofrecemos nuestro tiempo. Tiempo para contarte todo lo que sabemos sobre Los Oscos, tiempo para hablarte de nuestras tradiciones y nuestra historia.»</p></blockquote>
+          <ul class="ena__ayuda">
+            <li>Dónde comer o desayunar</li>
+            <li>Rutas a tu medida</li>
+            <li>Recomendaciones del lugar</li>
+            <li>Detalles para sorprender a alguien</li>
+          </ul>
+        </div>
+        <p class="ena__firma">«¡Os espero en el paraíso para contagiaros mi felicidad!»</p>
+        <p class="ena__sigue"><a class="enlace" href="#apartamentos">La puerta y las ventanas de esta casa</a> · <a class="enlace" href="#lana">Y la lana</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. «El hilo» · la lana (módulo Hilo: js/hilo.js) ============ -->
+  <section id="lana" class="lana" aria-labelledby="t-lana">
+    <div class="env lana__cab">
+      <p class="eyebrow">La lana</p>
+      <h2 id="t-lana" data-partir>La Xuntanza <em>de Filandeiras</em></h2>
+      <p class="sec-cab__txt">Una <i>filandeira</i> es una mujer que hila; una <i>xuntanza</i>, una reunión.</p>
+    </div>
+    <div class="lana__modulo" data-modulo="hilo">
+      <!-- respaldo: el texto, los seis pasos y la foto -->
+      <div class="env lana__respaldo">
+        <div class="lana__txt">
+          <p class="lana__entrada">«En 2023 realizamos la primera Xuntanza de Filandeiras. Fue una mañana estupenda donde vecinos y turistas nos reunimos alrededor de la lana para aprender el proceso completo de su elaboración.»</p>
+          <p>Desde entonces vuelve cada año. Ena la organiza para mantener viva la tradición y para que las personas mayores de la zona tengan un espacio donde reunirse, recordar y compartir lo que saben: <q>son las propias personas que conocen estas técnicas quienes las muestran y explican</q>.</p>
+          <ol class="pasos">
+            <li><b>Lavado</b></li>
+            <li><b>Escarpullado</b>Abrir y limpiar la lana a mano antes de cardarla.</li>
+            <li><b>Cardado</b></li>
+            <li><b>Torcido</b></li>
+            <li><b>Filado</b>Hilar, con la <i>roca</i> (la rueca) y el <i>fuso</i> (el huso).</li>
+            <li><b>Calcetado</b></li>
+          </ol>
+          <p class="lana__frase">«Porque viajar también puede ser escuchar.»</p>
+          <p class="lana__acc"><a class="btn btn--verde" href="https://wa.me/34644835772" rel="noopener" target="_blank">Escribir a Ena</a> <a class="enlace" href="mailto:hola@oscosahio.es">hola@oscosahio.es</a></p>
+        </div>
+        <figure class="lana__f">
+          <picture data-foto="filandeira"><source type="image/avif" srcset="img/fotos/filandeira-480.avif 480w, img/fotos/filandeira-572.avif 572w" sizes="(max-width: 799px) 70vw, 28vw"><source type="image/webp" srcset="img/fotos/filandeira-480.webp 480w, img/fotos/filandeira-572.webp 572w" sizes="(max-width: 799px) 70vw, 28vw"><img src="img/fotos/filandeira-572.jpg" srcset="img/fotos/filandeira-480.jpg 480w, img/fotos/filandeira-572.jpg 572w" sizes="(max-width: 799px) 70vw, 28vw" width="572" height="1024" alt="Unas manos hilando lana con la rueca" loading="lazy" decoding="async"></picture>
+          <figcaption>Hilando con la roca.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. «Los Oscos en 3D» (módulo Ruta: js/3d/) ============ -->
+  <section id="oscos" class="oscos" aria-labelledby="t-oscos">
+    <div class="env oscos__cab">
+      <p class="eyebrow">Los Oscos</p>
+      <h2 id="t-oscos" data-partir>El valle <em>del Ahío</em></h2>
+      <p class="sec-cab__txt">San Martín, Santa Eulalia y Villanueva de Oscos forman Los Oscos, dentro de la Reserva de la Biosfera Río Eo, Oscos y Terras de Burón (UNESCO, 2007).</p>
+    </div>
+    <div class="oscos__modulo" data-modulo="ruta">
+      <!-- respaldo: el plano (si el módulo Ruta ya lo ha dejado) y los lugares -->
+      <div class="env oscos__respaldo">
+        <picture><source type="image/webp" srcset="img/terreno/plano.webp"><img class="oscos__plano" src="img/terreno/plano.jpg" width="1800" height="1264" alt="Plano del valle del río Ahío sobre el relieve y la foto aérea, con San Martín de Oscos, Santa Eulalia y Villanueva de Oscos, la Seimeira, Mazonovo y el Palacio de Mon" loading="lazy" decoding="async"></picture>
+        <ul class="oscos__lista">
+          <li><b>Santa Eulalia de Oscos</b><span>El concejo vecino, de donde es Ena.</span><span class="dist" data-dist="Santa Eulalia de Oscos">10 km · 15 min en coche</span></li>
+          <li><b>Villanueva de Oscos</b><span>El tercero de Los Oscos.</span><span class="dist" data-dist="Villanueva de Oscos">7,8 km · 8 min en coche</span></li>
+          <li><b>La Seimeira</b><span>La cascada, desde Pumares.</span><span class="dist" data-dist="Seimeira">12 km · 17 min en coche</span></li>
+          <li><b>Mazonovo</b><span>El mazo, en Santa Eulalia.</span><span class="dist" data-dist="Mazonovo">13 km · 19 min en coche</span></li>
+          <li><b>Palacio de Mon</b><span>Del siglo XVIII, sobre el Ahío.</span><span class="dist" data-dist="Mon">4,7 km · 9 min en coche</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9. Alrededor ============ -->
+  <section id="alrededor" class="sec alrededor" aria-labelledby="t-alrededor">
+    <div class="env">
+      <header class="sec-cab">
+        <p class="eyebrow">Alrededor</p>
+        <h2 id="t-alrededor" data-partir>Andar <em>Los Oscos</em></h2>
+        <p class="sec-cab__txt">Las rutas que Ena cuenta en su web, con la dificultad según su valoración. Ella te ayuda a elegir la tuya.</p>
+      </header>
+      <div class="alrededor__in">
+        <div class="rutas">
+          <h3 class="rutas__grupo">Salen del pueblo</h3>
+          <ol class="rutas__lista">
+            <li class="ruta-f"><h4>Senda Verde de San Martín</h4><p class="ruta-f__datos"><span class="nivel" data-nivel="baja">Baja</span> 2 h · 8 km · circular · 200 m de desnivel</p><p>Empieza en la puerta de Ahío San Martín y sube a La Bouza, la zona alta del pueblo.</p></li>
+            <li class="ruta-f"><h4>Monte Marón y Ascuita</h4><p class="ruta-f__datos"><span class="nivel" data-nivel="baja">Baja</span> 2 h · 9 km · circular · 400 m de desnivel</p><p>Desde la plaza de las Infantas, al monte Marón (897 m) y bajada por Ascuita.</p></li>
+            <li class="ruta-f"><h4>Mina Carmina</h4><p class="ruta-f__datos"><span class="nivel" data-nivel="alta">Alta</span> 3 h · 10 km · circular</p><p>Sale de San Martín y pasa por la antigua mina de plata, plomo y zinc.</p></li>
+            <li class="ruta-f"><h4>Ruta de Mon</h4><p class="ruta-f__datos"><span class="nivel" data-nivel="media">Media</span> 5 h · 13 km · circular · 270 m de desnivel</p><p>Por el Palacio de Mon y la capilla de Santa Marina hasta el Mazo de Mon, junto al Ahío.</p></li>
+          </ol>
+          <h3 class="rutas__grupo">Un poco más lejos</h3>
+          <ol class="rutas__lista">
+            <li class="ruta-f"><h4>La Seimeira</h4><p class="ruta-f__datos"><span class="nivel" data-nivel="media">Media</span> 3 h · 8 km · lineal · 313 m de desnivel</p><p>Desde Pumares, a 1 km de Santa Eulalia, por el río Agüeira hasta la cascada: en la fala de Los Oscos, <i>seimeira</i> es cascada.</p></li>
+            <li class="ruta-f"><h4>Piorno a Os Fornos</h4><p class="ruta-f__datos"><span class="nivel" data-nivel="media">Media</span> 3 h · 6 km · lineal · 350 m de desnivel</p><p>Desde Piorno, a 20 minutos en coche: la aldea de casas antiguas y las bocaminas de hierro.</p></li>
+            <li class="ruta-f"><h4>Forcón de los Ríos</h4><p class="ruta-f__datos"><span class="nivel" data-nivel="media">Media</span> 4,5 h · 13 km · circular · 480 m de desnivel</p><p>Desde Santa Eulalia (o As Casías): bosque, ríos y la Casa Natal del Marqués de Sargadelos.</p></li>
+            <li class="ruta-f"><h4>Senda Verde del Agüeira</h4><p class="ruta-f__datos"><span class="nivel" data-nivel="media">Media</span> 6 h · 15 km · circular · 580 m de desnivel</p><p>Desde Villanueva de Oscos, por las brañas y el Ecomuseo del Pan.</p></li>
+            <li class="ruta-f"><h4>Ruta de la Bobia</h4><p class="ruta-f__datos"><span class="nivel" data-nivel="alta">Alta</span> 6 h · 9 km · circular · 450 m de desnivel</p><p>Desde A Ponte de Penacoba: el Pico del Somo y la sierra de la Bobia.</p></li>
+            <li class="ruta-f"><h4>Ruta de la Coba</h4><p class="ruta-f__datos"><span class="nivel" data-nivel="alta">Alta</span> 6 h · 15 km · circular · 800 m de desnivel</p><p>Desde A Coba, a 8 km: bosque frondoso, una louseira y las vistas de Nonide.</p></li>
+            <li class="ruta-f"><h4>Mina As Talladas</h4><p class="ruta-f__datos"><span class="nivel" data-nivel="alta">Alta</span> 5 h · 13 km · circular · 688 m de desnivel</p><p>Desde la plaza de Santa Eulalia, por Ferreira y la Mina Carmina.</p></li>
+            <li class="ruta-f"><h4>Ruta del Silencio</h4><p class="ruta-f__datos"><span class="nivel" data-nivel="alta">Alta</span> 6 h · 11 km · circular · 650 m de desnivel</p><p>Desde San Cristóbal, por el valle del Ahío y cuatro aldeas casi vacías. La más difícil de la zona.</p></li>
+          </ol>
+        </div>
+        <div class="alrededor__lado">
+          <ul class="paisajes">
+            <li class="paisajes__ancha"><button type="button" class="foto-btn" data-visor="cotarelo" aria-label="Ver más grande: prados desde Cotarelo"><picture data-foto="cotarelo"><source type="image/avif" srcset="img/fotos/cotarelo-480.avif 480w, img/fotos/cotarelo-800.avif 800w, img/fotos/cotarelo-1024.avif 1024w, img/fotos/cotarelo-1280.avif 1280w, img/fotos/cotarelo-1600.avif 1600w" sizes="(max-width: 899px) 92vw, 40vw"><source type="image/webp" srcset="img/fotos/cotarelo-480.webp 480w, img/fotos/cotarelo-800.webp 800w, img/fotos/cotarelo-1024.webp 1024w, img/fotos/cotarelo-1280.webp 1280w, img/fotos/cotarelo-1600.webp 1600w" sizes="(max-width: 899px) 92vw, 40vw"><img src="img/fotos/cotarelo-800.jpg" srcset="img/fotos/cotarelo-480.jpg 480w, img/fotos/cotarelo-800.jpg 800w, img/fotos/cotarelo-1024.jpg 1024w, img/fotos/cotarelo-1280.jpg 1280w, img/fotos/cotarelo-1600.jpg 1600w" sizes="(max-width: 899px) 92vw, 40vw" width="1600" height="1054" alt="Prados y montes con la luz de la tarde, desde Cotarelo" loading="lazy" decoding="async"></picture></button></li>
+            <li><button type="button" class="foto-btn" data-visor="seimeira" aria-label="Ver más grande: la Seimeira"><picture data-foto="seimeira"><source type="image/avif" srcset="img/fotos/seimeira-480.avif 480w, img/fotos/seimeira-800.avif 800w, img/fotos/seimeira-1024.avif 1024w" sizes="(max-width: 899px) 44vw, 19vw"><source type="image/webp" srcset="img/fotos/seimeira-480.webp 480w, img/fotos/seimeira-800.webp 800w, img/fotos/seimeira-1024.webp 1024w" sizes="(max-width: 899px) 44vw, 19vw"><img src="img/fotos/seimeira-800.jpg" srcset="img/fotos/seimeira-480.jpg 480w, img/fotos/seimeira-800.jpg 800w, img/fotos/seimeira-1024.jpg 1024w" sizes="(max-width: 899px) 44vw, 19vw" width="1024" height="1534" alt="La cascada de la Seimeira entre árboles" loading="lazy" decoding="async"></picture></button></li>
+            <li><button type="button" class="foto-btn" data-visor="rio-ahio-2" aria-label="Ver más grande: el Ahío entre piedras"><picture data-foto="rio-ahio-2"><source type="image/avif" srcset="img/fotos/rio-ahio-2-480.avif 480w, img/fotos/rio-ahio-2-768.avif 768w" sizes="(max-width: 899px) 44vw, 19vw"><source type="image/webp" srcset="img/fotos/rio-ahio-2-480.webp 480w, img/fotos/rio-ahio-2-768.webp 768w" sizes="(max-width: 899px) 44vw, 19vw"><img src="img/fotos/rio-ahio-2-768.jpg" srcset="img/fotos/rio-ahio-2-480.jpg 480w, img/fotos/rio-ahio-2-768.jpg 768w" sizes="(max-width: 899px) 44vw, 19vw" width="768" height="1024" alt="El río Ahío bajando entre piedras con musgo" loading="lazy" decoding="async"></picture></button></li>
+            <li class="paisajes__ancha"><button type="button" class="foto-btn" data-visor="mina-carmina" aria-label="Ver más grande: el valle de la Mina Carmina"><picture data-foto="mina-carmina"><source type="image/avif" srcset="img/fotos/mina-carmina-480.avif 480w, img/fotos/mina-carmina-800.avif 800w, img/fotos/mina-carmina-1024.avif 1024w, img/fotos/mina-carmina-1280.avif 1280w, img/fotos/mina-carmina-1600.avif 1600w" sizes="(max-width: 899px) 92vw, 40vw"><source type="image/webp" srcset="img/fotos/mina-carmina-480.webp 480w, img/fotos/mina-carmina-800.webp 800w, img/fotos/mina-carmina-1024.webp 1024w, img/fotos/mina-carmina-1280.webp 1280w, img/fotos/mina-carmina-1600.webp 1600w" sizes="(max-width: 899px) 92vw, 40vw"><img src="img/fotos/mina-carmina-800.jpg" srcset="img/fotos/mina-carmina-480.jpg 480w, img/fotos/mina-carmina-800.jpg 800w, img/fotos/mina-carmina-1024.jpg 1024w, img/fotos/mina-carmina-1280.jpg 1280w, img/fotos/mina-carmina-1600.jpg 1600w" sizes="(max-width: 899px) 92vw, 40vw" width="1600" height="1200" alt="El valle de la Mina Carmina, con montes verdes" loading="lazy" decoding="async"></picture></button></li>
+            <li><button type="button" class="foto-btn" data-visor="camino-otono" aria-label="Ver más grande: un camino en otoño"><picture data-foto="camino-otono"><source type="image/avif" srcset="img/fotos/camino-otono-480.avif 480w, img/fotos/camino-otono-800.avif 800w, img/fotos/camino-otono-1024.avif 1024w, img/fotos/camino-otono-1280.avif 1280w, img/fotos/camino-otono-1500.avif 1500w" sizes="(max-width: 899px) 44vw, 19vw"><source type="image/webp" srcset="img/fotos/camino-otono-480.webp 480w, img/fotos/camino-otono-800.webp 800w, img/fotos/camino-otono-1024.webp 1024w, img/fotos/camino-otono-1280.webp 1280w, img/fotos/camino-otono-1500.webp 1500w" sizes="(max-width: 899px) 44vw, 19vw"><img src="img/fotos/camino-otono-800.jpg" srcset="img/fotos/camino-otono-480.jpg 480w, img/fotos/camino-otono-800.jpg 800w, img/fotos/camino-otono-1024.jpg 1024w, img/fotos/camino-otono-1280.jpg 1280w, img/fotos/camino-otono-1500.jpg 1500w" sizes="(max-width: 899px) 44vw, 19vw" width="1500" height="1001" alt="Un camino cubierto de hojas y musgo en otoño" loading="lazy" decoding="async"></picture></button></li>
+            <li><button type="button" class="foto-btn" data-visor="uces" aria-label="Ver más grande: brezo en flor"><picture data-foto="uces"><source type="image/avif" srcset="img/fotos/uces-480.avif 480w, img/fotos/uces-768.avif 768w" sizes="(max-width: 899px) 44vw, 19vw"><source type="image/webp" srcset="img/fotos/uces-480.webp 480w, img/fotos/uces-768.webp 768w" sizes="(max-width: 899px) 44vw, 19vw"><img src="img/fotos/uces-768.jpg" srcset="img/fotos/uces-480.jpg 480w, img/fotos/uces-768.jpg 768w" sizes="(max-width: 899px) 44vw, 19vw" width="768" height="1024" alt="Brezo y tojo en flor en el monte" loading="lazy" decoding="async"></picture></button></li>
+            <li><button type="button" class="foto-btn" data-visor="bobia" aria-label="Ver más grande: la sierra de la Bobia"><picture data-foto="bobia"><source type="image/avif" srcset="img/fotos/bobia-480.avif 480w, img/fotos/bobia-800.avif 800w, img/fotos/bobia-1024.avif 1024w, img/fotos/bobia-1280.avif 1280w, img/fotos/bobia-1600.avif 1600w" sizes="(max-width: 899px) 44vw, 19vw"><source type="image/webp" srcset="img/fotos/bobia-480.webp 480w, img/fotos/bobia-800.webp 800w, img/fotos/bobia-1024.webp 1024w, img/fotos/bobia-1280.webp 1280w, img/fotos/bobia-1600.webp 1600w" sizes="(max-width: 899px) 44vw, 19vw"><img src="img/fotos/bobia-800.jpg" srcset="img/fotos/bobia-480.jpg 480w, img/fotos/bobia-800.jpg 800w, img/fotos/bobia-1024.jpg 1024w, img/fotos/bobia-1280.jpg 1280w, img/fotos/bobia-1600.jpg 1600w" sizes="(max-width: 899px) 44vw, 19vw" width="1600" height="1200" alt="La sierra de la Bobia con rayos de sol entre las nubes" loading="lazy" decoding="async"></picture></button></li>
+            <li><button type="button" class="foto-btn" data-visor="corte-ovellas" aria-label="Ver más grande: una cabaña de piedra"><picture data-foto="corte-ovellas"><source type="image/avif" srcset="img/fotos/corte-ovellas-480.avif 480w, img/fotos/corte-ovellas-768.avif 768w" sizes="(max-width: 899px) 44vw, 19vw"><source type="image/webp" srcset="img/fotos/corte-ovellas-480.webp 480w, img/fotos/corte-ovellas-768.webp 768w" sizes="(max-width: 899px) 44vw, 19vw"><img src="img/fotos/corte-ovellas-768.jpg" srcset="img/fotos/corte-ovellas-480.jpg 480w, img/fotos/corte-ovellas-768.jpg 768w" sizes="(max-width: 899px) 44vw, 19vw" width="768" height="1024" alt="Una cabaña de piedra con tejado de losa en el monte" loading="lazy" decoding="async"></picture></button></li>
+          </ul>
+          <div class="cerca">
+            <h3>Cerca</h3>
+            <ul class="cerca__lista">
+              <li><b>Mazonovo</b><span>El mazo de Santa Eulalia.</span><span class="dist" data-dist="Mazonovo">13 km · 19 min en coche</span></li>
+              <li><b>Casa Natal del Marqués de Sargadelos</b><span>Museo en Ferreirela de Baxo.</span><span class="dist" data-dist="Sargadelos">11 km · 18 min en coche</span></li>
+              <li><b>Casa del Marco</b><span>En Villarquille.</span><span class="dist" data-dist="Casa del Marco">5,2 km · 8 min en coche</span></li>
+              <li><b>Mirador de A Paicega</b><span>En Pesoz.</span><span class="dist" data-dist="Paicega">19 km · 23 min en coche</span></li>
+              <li><b>Presa de Salime</b><span class="dist" data-dist="Salime">26 km · 24 min en coche</span></li>
+              <li><b>Taramundi</b><span class="dist" data-dist="Taramundi">28 km · 28 min en coche</span></li>
+            </ul>
+            <h3>En el pueblo</h3>
+            <p class="pueblo">Casa Bonilla (bar restaurante) · El Pequenón (tienda bar) · supermercado · farmacia · gasolinera 24 h · cajero · consultorio · oficina de turismo · parque infantil · piscina en verano.</p>
+            <p class="alrededor__fuente">Los horarios cambian: pregúntaselos a Ena al llegar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10. reservar: «Registro de entrada» (DEMOSTRACIÓN, js/reserva.js) ============ -->
+<section id="reservar" class="sec reservar oscuro" aria-labelledby="t-reservar">
+  <div class="env">
+    <div class="reservar__cab">
+      <header class="sec-cab">
+        <p class="eyebrow">Reservar</p>
+        <h2 id="t-reservar" data-partir>El registro <em>de entrada</em></h2>
+        <p class="sec-cab__txt">Elige las noches, cuántos apartamentos y cuántos sois, y firma. Si lo prefieres, llama o escribe por WhatsApp al <a class="enlace" href="tel:+34644835772">644 835 772</a> o a <a class="enlace" href="mailto:hola@oscosahio.es">hola@oscosahio.es</a>.</p>
+      </header>
+      <figure class="reservar__llave">
+        <picture data-foto="registro"><source type="image/avif" srcset="img/fotos/registro-480.avif 480w, img/fotos/registro-800.avif 800w, img/fotos/registro-1024.avif 1024w, img/fotos/registro-1280.avif 1280w" sizes="(max-width: 899px) 40vw, 220px"><source type="image/webp" srcset="img/fotos/registro-480.webp 480w, img/fotos/registro-800.webp 800w, img/fotos/registro-1024.webp 1024w, img/fotos/registro-1280.webp 1280w" sizes="(max-width: 899px) 40vw, 220px"><img src="img/fotos/registro-800.jpg" srcset="img/fotos/registro-480.jpg 480w, img/fotos/registro-800.jpg 800w, img/fotos/registro-1024.jpg 1024w, img/fotos/registro-1280.jpg 1280w" sizes="(max-width: 899px) 40vw, 220px" width="1280" height="1583" alt="Una mano firmando el libro de registro en la recepción, con la llave de madera sobre la mesa" loading="lazy" decoding="async"></picture>
+      </figure>
+    </div>
+    <p class="demo" role="note"><b>Demostración.</b> Así funcionaría la reserva directa en esta web. Las noches completas son de ejemplo, los precios son supuestos y no se envía, se guarda ni se cobra nada.</p>
+    <!-- la tinta del sello: un poco de ruido en el borde, como un sello de goma real -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="tinta-sello" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7" result="r"/><feDisplacementMap in="SourceGraphic" in2="r" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="d"/><feComponentTransfer in="r" result="h"><feFuncA type="discrete" tableValues="1 1 1 0 1 1 1 1"/></feComponentTransfer><feComposite in="d" in2="h" operator="in"/></filter></svg>
+    <div class="libro">
+      <div class="motor" id="motor" aria-live="off">
+        <noscript><p class="motor__sin">Para reservar sin JavaScript, llama al <a href="tel:+34644835772">644 835 772</a> o escribe a <a href="mailto:hola@oscosahio.es">hola@oscosahio.es</a>.</p></noscript>
+      </div>
+    </div>
+    <div class="reservar__saber">
+      <section class="saber" aria-labelledby="t-cobro">
+        <h3 id="t-cobro">Se paga al llegar</h3>
+        <p>Solo se cobra a la llegada al alojamiento. Al reservar se pide un número de tarjeta de débito como garantía.</p>
+        <p class="saber__aviso">Si te llega un cargo de Ahío San Martín antes de reservar, es un fraude.</p>
+        <p class="saber__fino">Puedes alojarte con un bono de Turismo Asturias de hasta 150 €; esta demostración no lo descuenta.</p>
+      </section>
+      <section class="saber" aria-labelledby="t-cancelar">
+        <h3 id="t-cancelar">Si tienes que cancelar</h3>
+        <ul class="saber__pasos">
+          <li><b>Más de 15 días antes</b>Sin gastos.</li>
+          <li><b>Entre 15 y 7 días antes</b>Se puede retener la mitad del importe.</li>
+          <li><b>Menos de 7 días antes</b>Se puede retener el importe íntegro.</li>
+        </ul>
+        <p class="saber__fino">Lo mismo vale para cambiar las fechas.</p>
+      </section>
+    </div>
+  </div>
+</section>
+  <!-- ============ 11. cómo llegar y preguntas ============ -->
+<section id="llegar" class="sec llegar" aria-labelledby="t-llegar">
+  <div class="env llegar__in">
+    <div class="llegar__txt">
+      <p class="eyebrow">Cómo llegar</p>
+      <h2 id="t-llegar" data-partir>La Villa, <em>San Martín de Oscos</em></h2>
+      <address class="llegar__dir">
+        Ahío San Martín<br>
+        La Villa s/n<br>
+        33777 San Martín de Oscos (Asturias)
+      </address>
+      <ul class="accesos">
+        <li><b>Oviedo</b><span>unas 2 horas</span></li>
+        <li><b>Madrid</b><span>unas 5 horas</span></li>
+        <li><b>Aeropuerto de Asturias</b><span>130 km</span></li>
+        <li><b>Estación de Oviedo</b><span>170 km</span></li>
+        <li><b>Playas del Cantábrico</b><span>unos 50 km</span></li>
+      </ul>
+      <details class="ruta-coche">
+        <summary>Por carretera, desde el norte o desde el sur</summary>
+        <p><b>Desde el norte:</b> A-8 hacia A Coruña, salida a la N-634 hacia Vegadeo; se cruza Vegadeo hacia La Garganta y se sigue por la AS-13 hasta San Martín de Oscos.</p>
+        <p><b>Desde el sur:</b> hasta Lugo, LU-530 a A Fonsagrada y hacia Grandas de Salime; en Barbeitos, la LU-27 hacia Santa Eulalia de Oscos y la AS-33 hasta San Martín de Oscos.</p>
+      </details>
+      <ul class="contacto">
+        <li><a href="tel:+34644835772"><b class="placa-num">644 835 772</b><span>Teléfono</span></a></li>
+        <li><a href="https://wa.me/34644835772" rel="noopener" target="_blank"><b>WhatsApp</b><span>Al mismo número</span></a></li>
+        <li><a href="mailto:hola@oscosahio.es"><b>hola@oscosahio.es</b><span>Correo</span></a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&amp;query=43.2650908%2C-6.9616133" rel="noopener" target="_blank"><b>Abrir en Google Maps</b><span>Para ir en coche</span></a></li>
+      </ul>
+    </div>
+    <div class="mapa" id="mapa">
+      <div class="map-consent" id="mapa-consent">
+        <svg class="map-consent__casa" viewBox="0 0 120 100" aria-hidden="true" focusable="false"><path d="M10 44 58 24 104 44V90H10Z M44 90V60h28v30 M50 24V8h18v18 M28 56h10v12H28Z M82 56h10v12H82Z"/></svg>
+        <p>El mapa es de Google y, al cargarlo, Google puede guardar cookies en tu navegador.</p>
+        <button type="button" class="btn btn--verde" id="mapa-btn">Ver el mapa</button>
+        <p class="map-consent__coord">43,26509 · −6,96161</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="env preguntas">
+    <h2 class="preguntas__tit" id="t-preguntas">Preguntas</h2>
+    <div class="preguntas__lista">
+      <details>
+        <summary>¿Cuándo se paga?</summary>
+        <p>Solo al llegar. Al reservar se pide un número de tarjeta de débito como garantía. Si te llega un cargo antes de reservar, es un fraude.</p>
+      </details>
+      <details>
+        <summary>¿Y si tengo que cancelar?</summary>
+        <p>Con más de 15 días de antelación, sin gastos. Entre 15 y 7 días, se puede retener la mitad del importe; con menos de 7 días, el importe entero. Lo mismo para cambiar las fechas.</p>
+      </details>
+      <details>
+        <summary>¿Por qué una noche cuesta más que dos?</summary>
+        <p>Porque la limpieza, el lavado y planchado de las sábanas y la recepción cuestan casi lo mismo una noche que varias: limpiar un apartamento lleva unas dos horas. Para poder ofrecer estancias de una noche se cobra un suplemento.</p>
+      </details>
+      <details>
+        <summary>¿Se puede ir con niños?</summary>
+        <p>Claro. Cada apartamento tiene un dormitorio con cama de matrimonio y en el salón caben hasta dos supletorias (15 € por persona y noche). Hay dos cunas de viaje (10 €, una vez). En el salón de arriba hay juegos para los niños.</p>
+      </details>
+      <details>
+        <summary>¿Puedo llevar a mi perro?</summary>
+        <p>Sí: hasta 3 mascotas pequeñas o 2 grandes por apartamento, 12 € por noche y apartamento, como mucho 72 €. Tienen su set: cama, manta, bebedero y galletas.</p>
+      </details>
+      <details>
+        <summary>¿Se puede fumar?</summary>
+        <p>No, en ningún sitio del edificio (ley 28/2005). En la terraza hay ceniceros.</p>
+      </details>
+      <details>
+        <summary>¿Puedo elegir apartamento?</summary>
+        <p>Al reservar le cuentas a Ena qué prefieres (planta baja sin escaleras, dúplex, cama de 1,80) y te asigna el que mejor encaje.</p>
+      </details>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ 12. pie: la calceta terminada (la teje el módulo Hilo, js/hilo.js) ============ -->
+<footer class="pie" id="pie">
+  <div class="env">
+    <div class="pie__calceta" data-modulo="calceta">
+      <!-- respaldo: la tira de punto ya terminada -->
+      <svg class="calceta-respaldo" viewBox="0 0 640 126" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id="punto-calceta" width="16" height="18" patternUnits="userSpaceOnUse">
+            <path d="M1.5 1.5C3 8 5.5 13 8 16.5M14.5 1.5C13 8 10.5 13 8 16.5"/>
+          </pattern>
+        </defs>
+        <rect width="640" height="126" fill="url(#punto-calceta)"/>
+      </svg>
+    </div>
+    <div class="pie__cols">
+      <div class="pie__marca">
+        <p class="pie__logo"><img src="marca/logo-320.png" srcset="marca/logo-320.png 1x, marca/logo-640.png 2x" width="160" height="145" alt="Ahío San Martín · Apartamentos rurales Casa da Vila" loading="lazy"></p>
+        <p>Ocho apartamentos rurales en el antiguo ayuntamiento de San Martín de Oscos.</p>
+        <p>La Villa s/n<br>33777 San Martín de Oscos (Asturias)</p>
+      </div>
+      <div>
+        <h2 class="pie__tit">Reservar</h2>
+        <p><a href="tel:+34644835772" class="placa-num">644 835 772</a> · <a href="https://wa.me/34644835772" rel="noopener" target="_blank">WhatsApp</a><br><a href="mailto:hola@oscosahio.es">hola@oscosahio.es</a></p>
+        <a class="btn btn--verde" href="#reservar" data-reservar>Ver fechas</a>
+      </div>
+      <div>
+        <h2 class="pie__tit">Por aquí</h2>
+        <p><a href="#vidas">Las vidas del edificio</a><br><a href="#apartamentos">Los apartamentos</a><br><a href="#lana">La Xuntanza de Filandeiras</a><br><a href="#alrededor">Rutas</a><br><a href="#llegar">Cómo llegar</a></p>
+        <p><a href="https://www.instagram.com/ahiosanmartin/" rel="noopener" target="_blank">Instagram</a> · <a href="https://www.facebook.com/ahiosanmartin" rel="noopener" target="_blank">Facebook</a></p>
+      </div>
+    </div>
+    <div class="pie__legal">
+      <p>Apartamentos rurales inscritos en el Registro de Empresas y Actividades Turísticas del Principado de Asturias con el número <span class="placa-num">AR.32.AS</span>.</p>
+      <nav aria-label="Legal"><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a><a href="cookies.html">Cookies</a><a href="accesibilidad.html">Accesibilidad</a><button type="button" id="abrir-cookies">Preferencias de cookies</button></nav>
+      <p>© <span id="anno">2026</span> Ahío San Martín · San Martín de Oscos, Asturias</p>
+    </div>
+  </div>
+</footer>
+
+<div class="cookies" id="cookies" role="region" aria-label="Aviso de cookies" hidden>
+  <p>Esta web no usa cookies de análisis ni de publicidad. Guarda en tu navegador que has visto este aviso; las letras vienen de Google Fonts, el tiempo de ahora de Open-Meteo (sin cookies) y el mapa de Google solo se carga si lo pides. <a href="cookies.html">Más información</a></p>
+  <div class="cookies__acc">
+    <button class="btn btn--verde" type="button" id="ck-si">Entendido</button>
+    <button class="btn btn--hueco" type="button" id="ck-no">Solo lo necesario</button>
+  </div>
+</div>
+
+<!-- MANDO DE MAQUETA (no viaja al cliente): solo con ?revision -->
+<div class="mando" id="mando" role="group" aria-label="Dos versiones de la misma web" hidden>
+  <span class="mando__eti">Versión</span>
+  <button type="button" data-densidad="niebla" aria-pressed="true">Niebla</button>
+  <button type="button" data-densidad="sobria" aria-pressed="false">Sobria</button>
+</div>
+<!-- fin del MANDO DE MAQUETA -->
+
+<!-- visor de fotos: se abre por el NOMBRE de la foto, no por su puesto -->
+<dialog class="visor" id="visor" aria-label="Foto">
+  <figure class="visor__fig">
+    <img id="visor-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="1024" height="768">
+    <figcaption id="visor-pie"></figcaption>
+  </figure>
+  <button type="button" class="visor__btn visor__btn--ant" id="visor-ant" aria-label="Foto anterior">‹</button>
+  <button type="button" class="visor__btn visor__btn--sig" id="visor-sig" aria-label="Foto siguiente">›</button>
+  <button type="button" class="visor__cerrar" id="visor-cerrar">Cerrar</button>
+  <p class="visor__n" id="visor-n" aria-live="polite"></p>
+</dialog>
+
+<!-- librerías (jsDelivr, con versión fija): Lenis suaviza el scroll; GSAP y ScrollTrigger los usan los módulos -->
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<!-- los módulos (cada uno en su archivo; si falta alguno, construir.mjs quita su etiqueta y se queda el respaldo del HTML) -->
+<script src="js/niebla.js?v=ed989c5f" defer></script>
+<script src="js/linterna.js?v=c962fb3d" defer></script>
+<script src="js/fachada.js?v=326ef5de" defer></script>
+<!-- la web -->
+<script src="js/main.js?v=0b56b058" defer></script>
+<!-- el 3D de «Los Oscos»: módulo diferido; si no carga, se queda el plano -->
+<script type="module" src="js/3d/arranque.js?v=4dab9f2f" onerror="var r=document.getElementById('oscos');if(r)r.classList.add('sin-3d')"></script>
+</body>
+</html>

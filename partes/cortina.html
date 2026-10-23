@@ -1,0 +1,59 @@
+<!-- ============ cortina «La linterna en la niebla» (agente Entrada: partes/cortina.html + css/entrada.css + js/linterna.js) ============
+     Niebla de madrugada; se dibuja a línea la casa del logo (muros → tejado → linterna), la linterna se enciende,
+     y la niebla se abre desde su luz y destapa la portada. El dibujo vuela al logo de la cabecera si lo encuentra
+     ([data-logo-cortina]); si no, se funde.
+     Este script va ANTES de la cortina: solo con JS se enseña (html.cortina-activa), así que sin JS no aparece nunca.
+     Expone Ahio.cortina = { alAbrirse(fn), alRetirarse(fn), abrir(), retirar(), abierta, fuera, enMarcha, marcas, apertura }
+     y lanza en document «ahio:cortina-abre» (EMPIEZA a abrirse) y «ahio:cortina-fuera» (ya no está).
+     Red de seguridad: si js/linterna.js no arranca en 2,6 s, fuera; y a los 8 s, fuera pase lo que pase.
+     ?sin-cortina la quita (para pruebas y para mirar la portada). -->
+<script>
+(function (d, w) {
+  var h = d.documentElement, A = w.Ahio = w.Ahio || {}, abierta = false, fuera = false, alAbrir = [], alFuera = [];
+  h.classList.add('js');
+  function avisar(lista, nombre) {
+    lista.splice(0).forEach(function (f) { try { f(); } catch (e) { console.warn(e); } });
+    try { d.dispatchEvent(new CustomEvent(nombre)); } catch (e) {}
+  }
+  function abrir() { if (abierta) return; abierta = true; h.classList.add('cortina-abriendo'); avisar(alAbrir, 'ahio:cortina-abre'); }
+  function retirar() {
+    if (fuera) return;
+    fuera = true;
+    clearTimeout(red1); clearTimeout(red2);
+    var c = d.getElementById('cortina');
+    if (c) c.hidden = true;
+    h.classList.remove('cortina-activa', 'cortina-abriendo', 'cortina-vuela');
+    h.classList.add('cortina-fuera');
+    abrir();
+    avisar(alFuera, 'ahio:cortina-fuera');
+  }
+  A.cortina = {
+    alAbrirse: function (f) { if (abierta) f(); else alAbrir.push(f); },
+    alRetirarse: function (f) { if (fuera) f(); else alFuera.push(f); },
+    abrir: abrir, retirar: retirar, enMarcha: false, marcas: { carga: 0 }, apertura: null,
+    get abierta() { return abierta; }, get fuera() { return fuera; }
+  };
+  var red1 = setTimeout(function () { if (!A.cortina.enMarcha) retirar(); }, 2600);
+  var red2 = setTimeout(retirar, 8000);
+  var quieto = false, sin = false;
+  try { quieto = w.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  try { sin = /[?&]sin-cortina\b/.test(w.location.search); } catch (e) {}
+  if (quieto || sin) retirar(); else h.classList.add('cortina-activa');
+})(document, window);
+</script>
+<div class="cortina" id="cortina" aria-hidden="true">
+  <canvas class="cortina__lienzo"></canvas>
+  <div class="cortina__luz"></div>
+  <div class="cortina__centro">
+    <svg class="cortina__casa" viewBox="190 30 270 240" focusable="false">
+      <path class="cortina__cristal" d="M293.48 98.58 L293.48 63.75 L324.98 48.49 L356.48 63.79 L356.48 99.19 L326.11 85.46 Z"/>
+      <path class="cortina__trazo" data-fase="muros" d="M356.48 99.19 L356.48 230.29 L208.86 230.29 L208.86 132.59" pathLength="1"/>
+      <path class="cortina__trazo" data-fase="muros" d="M266.00 250.53 L439.05 250.53 L439.05 136.52" pathLength="1"/>
+      <path class="cortina__trazo" data-fase="tejado" d="M208.86 132.59 L326.11 85.46 L439.05 136.52" pathLength="1"/>
+      <path class="cortina__trazo" data-fase="linterna" d="M293.48 133.00 L293.48 63.75 L324.98 48.49 L356.48 63.79 L356.48 99.19" pathLength="1"/>
+    </svg>
+    <p class="cortina__nombre">Ahío San Martín</p>
+    <p class="cortina__linea">Apartamentos rurales · San Martín de Oscos</p>
+  </div>
+</div>
+<noscript><style>#cortina{display:none!important}</style></noscript>

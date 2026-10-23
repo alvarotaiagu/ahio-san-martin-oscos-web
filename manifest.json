@@ -1,0 +1,13 @@
+{
+  "name": "Ahío San Martín · San Martín de Oscos",
+  "short_name": "Ahío San Martín",
+  "lang": "es",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#FAF6E1",
+  "theme_color": "#2B3035",
+  "icons": [
+    { "src": "marca/icono-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "marca/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

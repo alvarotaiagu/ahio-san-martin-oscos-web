@@ -1,0 +1,40 @@
+<!-- ============ 10. reservar: «Registro de entrada» (DEMOSTRACIÓN, js/reserva.js) ============ -->
+<section id="reservar" class="sec reservar oscuro" aria-labelledby="t-reservar">
+  <div class="env">
+    <div class="reservar__cab">
+      <header class="sec-cab">
+        <p class="eyebrow">Reservar</p>
+        <h2 id="t-reservar" data-partir>El registro <em>de entrada</em></h2>
+        <p class="sec-cab__txt">Elige las noches, cuántos apartamentos y cuántos sois, y firma. Si lo prefieres, llama o escribe por WhatsApp al <a class="enlace" href="tel:+34644835772">644 835 772</a> o a <a class="enlace" href="mailto:hola@oscosahio.es">hola@oscosahio.es</a>.</p>
+      </header>
+      <figure class="reservar__llave">
+        <img data-foto="registro" alt="Una mano firmando el libro de registro en la recepción, con la llave de madera sobre la mesa" sizes="(max-width: 899px) 40vw, 220px">
+      </figure>
+    </div>
+    <p class="demo" role="note"><b>Demostración.</b> Así funcionaría la reserva directa en esta web. Las noches completas son de ejemplo, los precios son supuestos y no se envía, se guarda ni se cobra nada.</p>
+    <!-- la tinta del sello: un poco de ruido en el borde, como un sello de goma real -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="tinta-sello" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7" result="r"/><feDisplacementMap in="SourceGraphic" in2="r" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="d"/><feComponentTransfer in="r" result="h"><feFuncA type="discrete" tableValues="1 1 1 0 1 1 1 1"/></feComponentTransfer><feComposite in="d" in2="h" operator="in"/></filter></svg>
+    <div class="libro">
+      <div class="motor" id="motor" aria-live="off">
+        <noscript><p class="motor__sin">Para reservar sin JavaScript, llama al <a href="tel:+34644835772">644 835 772</a> o escribe a <a href="mailto:hola@oscosahio.es">hola@oscosahio.es</a>.</p></noscript>
+      </div>
+    </div>
+    <div class="reservar__saber">
+      <section class="saber" aria-labelledby="t-cobro">
+        <h3 id="t-cobro">Se paga al llegar</h3>
+        <p>Solo se cobra a la llegada al alojamiento. Al reservar se pide un número de tarjeta de débito como garantía.</p>
+        <p class="saber__aviso">Si te llega un cargo de Ahío San Martín antes de reservar, es un fraude.</p>
+        <p class="saber__fino">Puedes alojarte con un bono de Turismo Asturias de hasta 150 €; esta demostración no lo descuenta.</p>
+      </section>
+      <section class="saber" aria-labelledby="t-cancelar">
+        <h3 id="t-cancelar">Si tienes que cancelar</h3>
+        <ul class="saber__pasos">
+          <li><b>Más de 15 días antes</b>Sin gastos.</li>
+          <li><b>Entre 15 y 7 días antes</b>Se puede retener la mitad del importe.</li>
+          <li><b>Menos de 7 días antes</b>Se puede retener el importe íntegro.</li>
+        </ul>
+        <p class="saber__fino">Lo mismo vale para cambiar las fechas.</p>
+      </section>
+    </div>
+  </div>
+</section>
