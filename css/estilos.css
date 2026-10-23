@@ -1,0 +1,47 @@
+/* Ahío San Martín · «La linterna» · estilos de la web.
+   Los módulos (Entrada, Fachada, Hilo, Ruta) leen estos tokens con var(--x, respaldo).
+   Paleta: el verde y el crema son los del logo (medidos); la linterna es EL acento (la luz).
+   Letras (las carga el <head> de la página, no este CSS):
+   https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Gilda+Display&family=Wix+Madefor+Text:wght@400..600&display=swap */
+
+:root {
+  /* --- color --- */
+  --crema: #FAF6E1;          /* el papel del logo: fondo claro principal */
+  --crema-2: #F2ECD2;        /* papel un punto más hondo (bandas, el libro de registro) */
+  --verde: #023919;          /* el verde del logo: titulares, sello, línea del dibujo sobre crema */
+  --verde-2: #1F5236;        /* verde algo más claro para líneas finas y hover */
+  --pizarra: #2B3035;        /* secciones oscuras: piedra y tejado */
+  --pizarra-2: #3D444B;
+  --niebla: #D7DCDA;         /* velos, bordes, la cortina */
+  --niebla-2: #A9B2B2;
+  --linterna: #F2B84B;       /* EL acento: la luz. Solo sobre pizarra, como fondo de botón o como halo */
+  --linterna-texto: #725F31; /* respaldo sin color-mix: 5,7:1 sobre crema, 4,7:1 sobre lana */
+  --linterna-texto: color-mix(in srgb, var(--linterna) 40%, var(--tinta));
+  --linterna-halo: rgb(242 184 75 / .38);
+  --lana: #EADFC8;           /* lana cruda: la sección F y el pie */
+  --tinta: #1D2420;          /* texto sobre crema; nunca negro puro */
+  --tinta-2: #5F635A;        /* texto secundario sobre crema (5,7:1) y lana (4,6:1) */
+  --linea: rgb(2 57 25 / .22);   /* filetes finos verdes sobre crema */
+  --linea-clara: rgb(250 246 225 / .2); /* filetes sobre pizarra */
+
+  /* --- letras (tres y ninguna más) --- */
+  --letra-titular: 'Gilda Display', 'Times New Roman', Georgia, serif;
+  --letra-placa: 'Castoro Titling', 'Gilda Display', Georgia, serif;
+  --letra-texto: 'Wix Madefor Text', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* --- medidas --- */
+  --ancho: 1240px;
+  --ancho-texto: 38rem;
+  --margen: clamp(1rem, 4vw, 2.5rem);
+  --seccion: clamp(4.5rem, 11vw, 9rem);
+  --radio: 3px;
+  --cabecera: 4.25rem;
+
+  /* --- movimiento --- */
+  --ease-salida: cubic-bezier(.16, 1, .3, 1);
+  --ease-suave: cubic-bezier(.65, 0, .35, 1);
+
+  /* --- el foco del teclado: halo ámbar de linterna con contorno de 2 px --- */
+  --foco-contorno: var(--verde);
+  --foco-halo: 0 0 0 4px var(--linterna-halo), 0 0 22px 6px rgb(242 184 75 / .45);
+}

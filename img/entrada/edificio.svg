@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="190 30 270 240" fill="none" stroke="#FAF6E1" stroke-width="5.3" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="4">
+  <!-- La casa del logo de Ahío San Martín, a línea. Medida del PNG real (pruebas/entrada-edificio.py), no calcada. -->
+  <path id="cristal" d="M293.48 98.58 L293.48 63.75 L324.98 48.49 L356.48 63.79 L356.48 99.19 L326.11 85.46 Z" fill="#F2B84B" stroke="none" opacity="0"/>
+  <path id="muros-delante" data-fase="muros" d="M356.48 99.19 L356.48 230.29 L208.86 230.29 L208.86 132.59" pathLength="1"/>
+  <path id="muros-detras" data-fase="muros" d="M266.00 250.53 L439.05 250.53 L439.05 136.52" pathLength="1"/>
+  <path id="tejado" data-fase="tejado" d="M208.86 132.59 L326.11 85.46 L439.05 136.52" pathLength="1"/>
+  <path id="linterna" data-fase="linterna" d="M293.48 133.00 L293.48 63.75 L324.98 48.49 L356.48 63.79 L356.48 99.19" pathLength="1"/>
+</svg>

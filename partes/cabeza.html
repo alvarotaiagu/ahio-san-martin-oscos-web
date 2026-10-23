@@ -1,0 +1,59 @@
+<!-- script bloqueante: clases antes del primer pintado y el puente con la cortina (módulo Entrada: js/linterna.js) -->
+<script>
+(function (d) {
+  var h = d.documentElement;
+  h.classList.add('js');
+  // MANDO DE MAQUETA (no viaja al cliente): solo con ?revision
+  try {
+    var q = new URLSearchParams(location.search);
+    if (q.has('revision')) {
+      h.classList.add('revision');
+      if (q.get('densidad') === 'sobria') h.classList.add('densidad-sobria');
+    }
+  } catch (e) {}
+  // El puente con la cortina: existe desde el primer momento, cargue antes quien cargue.
+  // La cortina (Entrada) llama a Ahio.abrir() cuando EMPIEZA a abrirse y a Ahio.retirarCortina() al acabar
+  // (o lanza ahio:cortina-abre / ahio:cortina-fuera). La web y los módulos usan Ahio.alAbrirse(fn).
+  var A = window.Ahio = window.Ahio || {};
+  var cola = [];
+  var avisar = function (n) { try { d.dispatchEvent(new CustomEvent(n)); } catch (e) {} };
+  A.alAbrirse = function (fn) { if (A.abierta) { try { fn(); } catch (e) { console.warn(e); } } else cola.push(fn); };
+  A.abrir = function () {
+    if (A.abierta) return;
+    A.abierta = true;
+    cola.splice(0).forEach(function (fn) { try { fn(); } catch (e) { console.warn(e); } });
+    avisar('ahio:abierta');
+  };
+  A.retirarCortina = function () {
+    if (A.cortinaFuera) return;
+    A.cortinaFuera = true;
+    clearTimeout(window.__redCortina);
+    h.classList.remove('cortina-activa');
+    h.classList.add('cortina-fuera');
+    A.abrir();
+    avisar('ahio:fuera');
+  };
+  d.addEventListener('ahio:cortina-abre', function () { A.abrir(); });
+  d.addEventListener('ahio:cortina-fuera', function () { A.retirarCortina(); });
+  // red de seguridad por si main.js o la cortina no llegan: la cortina se va sola
+  window.__redCortina = setTimeout(function () { A.retirarCortina(); }, 6500);
+})(document);
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Gilda+Display&family=Wix+Madefor+Text:wght@400..600&display=swap">
+<link rel="stylesheet" href="css/estilos.css">
+<link rel="stylesheet" href="css/entrada.css">
+<link rel="stylesheet" href="css/fachada.css">
+<link rel="stylesheet" href="css/hilo.css">
+<link rel="stylesheet" href="css/3d.css">
+<link rel="icon" href="marca/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="marca/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="marca/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2B3035">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image" content="img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<noscript><style>.cortina,#cortina{display:none!important}</style></noscript>

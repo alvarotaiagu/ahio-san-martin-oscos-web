@@ -1,0 +1,691 @@
+[
+ {
+  "nombre": "niebla-fachada",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280,
+   1600
+  ],
+  "ancho": 1600,
+  "alto": 1200,
+  "origen": "fotos/web/1161-fachada-1.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "fachada-frente",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280,
+   1600
+  ],
+  "ancho": 1600,
+  "alto": 900,
+  "origen": "fotos/web/2792-DSC09756-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "plaza",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 768,
+  "origen": "fotos/web/283-SIMPLE-fachada-principal.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "fachada-hierba",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280
+  ],
+  "ancho": 1280,
+  "alto": 1707,
+  "origen": "fotos/web/1546-fachada-entre-hierba-alta-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "jardin",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280,
+   1600
+  ],
+  "ancho": 1600,
+  "alto": 900,
+  "origen": "fotos/web/2790-DSC09778-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "ventana-pueblo",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280,
+   1600
+  ],
+  "ancho": 1600,
+  "alto": 900,
+  "origen": "fotos/web/2789-DSC09665-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "balcon",
+  "anchos": [
+   480,
+   768
+  ],
+  "ancho": 768,
+  "alto": 1024,
+  "origen": "fotos/web/1148-2planta-balcon.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "salon-alto",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280
+  ],
+  "ancho": 1280,
+  "alto": 1707,
+  "origen": "fotos/web/1545-3planta-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "butacas",
+  "anchos": [
+   480,
+   768
+  ],
+  "ancho": 768,
+  "alto": 1024,
+  "origen": "fotos/web/1530-3-planta-butacas.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "escalera",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280
+  ],
+  "ancho": 1280,
+  "alto": 1707,
+  "origen": "fotos/web/1733-IMG_0891-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "recepcion",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280
+  ],
+  "ancho": 1280,
+  "alto": 1707,
+  "origen": "fotos/web/1732-recepcion-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "registro",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280
+  ],
+  "ancho": 1280,
+  "alto": 1583,
+  "origen": "fotos/web/2078-recepcion.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "salon-piedra",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 768,
+  "origen": "fotos/web/1211-2plantaaa.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "ap-salon",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 768,
+  "origen": "fotos/web/1149-ap1-salon-comedor.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "ap-completo",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 768,
+  "origen": "fotos/web/1180-ap1-completouu.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "ap-dormitorio",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 768,
+  "origen": "fotos/web/1181-ap1-habita-con-cama.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "ap-ventana",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 1365,
+  "origen": "fotos/web/1164-ap1-ventana-habitacion-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "ap-mesa",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 1365,
+  "origen": "fotos/web/1357-ap1-mesa-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "duplex-dormitorio",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280
+  ],
+  "ancho": 1280,
+  "alto": 1707,
+  "origen": "fotos/web/2701-apart-7-luz-bonita-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "duplex-cama",
+  "anchos": [
+   480,
+   800,
+   960
+  ],
+  "ancho": 960,
+  "alto": 1280,
+  "origen": "fotos/web/2326-apt.7-cama-con-bano.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "duplex-velux",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 768,
+  "origen": "fotos/web/1150-ap7-habitacion-cud-velus.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "duplex-bajo-cubierta",
+  "anchos": [
+   480,
+   768
+  ],
+  "ancho": 768,
+  "alto": 1024,
+  "origen": "fotos/web/1689-habitacion.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "bano",
+  "anchos": [
+   480,
+   768
+  ],
+  "ancho": 768,
+  "alto": 1024,
+  "origen": "fotos/web/1177-ap7-bano.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "sofa-luz",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 1365,
+  "origen": "fotos/web/3120-sofa-con-luz-bonita-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "salon-luz",
+  "anchos": [
+   480,
+   819
+  ],
+  "ancho": 819,
+  "alto": 1024,
+  "origen": "fotos/web/1722-salon-desde-servilletero.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "supletorias",
+  "anchos": [
+   500
+  ],
+  "ancho": 500,
+  "alto": 512,
+  "origen": "fotos/web/2380-suples-2-apart-5.gimp_.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "cuna",
+  "anchos": [
+   500
+  ],
+  "ancho": 500,
+  "alto": 483,
+  "origen": "fotos/web/2376-cuna-apt-1.gimp_.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "mascotas",
+  "anchos": [
+   480,
+   707
+  ],
+  "ancho": 707,
+  "alto": 672,
+  "origen": "fotos/web/1794-ap-7-set-mascotas-e1718906958971.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "perro-fachada",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 1278,
+  "origen": "fotos/web/1795-border-coli-en-fachada.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "cuadros",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 1365,
+  "origen": "fotos/web/1208-cuadros-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "lamina-cesto",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 1365,
+  "origen": "fotos/web/2793-DSC09946-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "lamina-palloza",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 1365,
+  "origen": "fotos/web/2791-DSC09442-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "ena-puerta",
+  "anchos": [
+   480,
+   768
+  ],
+  "ancho": 768,
+  "alto": 1024,
+  "origen": "fotos/web/214-ena-mateos-entrada.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "ena-abre",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1200
+  ],
+  "ancho": 1200,
+  "alto": 1600,
+  "origen": "fotos/web/1374-ena-mateos-entrada-1.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "ena-ruta",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1200
+  ],
+  "ancho": 1200,
+  "alto": 1600,
+  "origen": "fotos/web/1162-ena-mateos-ruta-piorno-1.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "ena-cojines",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 768,
+  "origen": "fotos/web/2053-ena-colocando-cojines-cama.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "filandeira",
+  "anchos": [
+   480,
+   572
+  ],
+  "ancho": 572,
+  "alto": 1024,
+  "origen": "fotos/web/1635-filandeira.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "xuntanza",
+  "anchos": [
+   480,
+   800
+  ],
+  "ancho": 800,
+  "alto": 1067,
+  "origen": "fotos/web/2124-II-xuntanza-filandeiras.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "antiguo",
+  "anchos": [
+   248
+  ],
+  "ancho": 248,
+  "alto": 203,
+  "origen": "fotos/web/1288-ayuntamiento-antiguo.jpeg",
+  "recorte": null
+ },
+ {
+  "nombre": "rio-ahio",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 768,
+  "origen": "fotos/web/1229-rio-ahio-mazo-de-mon-1.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "rio-ahio-2",
+  "anchos": [
+   480,
+   768
+  ],
+  "ancho": 768,
+  "alto": 1024,
+  "origen": "fotos/web/1247-rio-ahio-mazo-de-mon-GIMP.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "rio-ahio-3",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 768,
+  "origen": "fotos/web/1228-rio-ahio-mazo-de-mon-desde-abajo-1.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "xatos",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 1365,
+  "origen": "fotos/web/1550-xatos-con-edificio-al-fondo-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "vaca-ventana",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 1365,
+  "origen": "fotos/web/1548-vaca-desdeventana-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "cotarelo",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280,
+   1600
+  ],
+  "ancho": 1600,
+  "alto": 1054,
+  "origen": "fotos/web/1339-paisaje-desde-cotarelo-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "bobia",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280,
+   1600
+  ],
+  "ancho": 1600,
+  "alto": 1200,
+  "origen": "fotos/web/1338-bobia-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "desde-bobia",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280,
+   1600
+  ],
+  "ancho": 1600,
+  "alto": 1200,
+  "origen": "fotos/web/1319-desde-la-bobia-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "mina-carmina",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280,
+   1600
+  ],
+  "ancho": 1600,
+  "alto": 1200,
+  "origen": "fotos/web/1329-mina-carmina-copia-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "camino-otono",
+  "anchos": [
+   480,
+   800,
+   1024,
+   1280,
+   1500
+  ],
+  "ancho": 1500,
+  "alto": 1001,
+  "origen": "fotos/web/2435-camino-otonno-2.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "hojas",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 1365,
+  "origen": "fotos/web/2632-camino-roble-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "castanas",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 1820,
+  "origen": "fotos/web/3102-castanas-punao-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "uces",
+  "anchos": [
+   480,
+   768
+  ],
+  "ancho": 768,
+  "alto": 1024,
+  "origen": "fotos/web/1246-uces-colorido-GIMP.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "ventana-piorno",
+  "anchos": [
+   480,
+   768
+  ],
+  "ancho": 768,
+  "alto": 1024,
+  "origen": "fotos/web/1231-ventana-piorno-1.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "corte-ovellas",
+  "anchos": [
+   480,
+   768
+  ],
+  "ancho": 768,
+  "alto": 1024,
+  "origen": "fotos/web/770-a-corte-das-ovellas-gimp.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "seimeira",
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "ancho": 1024,
+  "alto": 1534,
+  "origen": "fotos/web/2515-A-seimeira-santalla-2-scaled.jpg",
+  "recorte": null
+ },
+ {
+  "nombre": "panoramica",
+  "anchos": [
+   480,
+   800,
+   900
+  ],
+  "ancho": 900,
+  "alto": 506,
+  "origen": "fotos/web/1310-panoramica-san-martin-de-oscos.jpeg",
+  "recorte": null
+ },
+ {
+  "nombre": "musgo-helado",
+  "anchos": [
+   400
+  ],
+  "ancho": 400,
+  "alto": 535,
+  "origen": "fotos/web/2328-musgo-xelado.gimp_.jpg",
+  "recorte": null
+ }
+]
